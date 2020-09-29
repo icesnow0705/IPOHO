@@ -132,7 +132,6 @@
 <!-- COMMON SCRIPTS -->
   	<script src="<%=request.getContextPath()%>/plugins/js/common_scripts.js"></script>
   	<script src="<%=request.getContextPath()%>/plugins/js/main.js"></script>
-	<script src="<%=request.getContextPath()%>/plugins/assets/validate.js"></script>
 	
 <!-- Map -->
 	<script src="http://maps.googleapis.com/maps/api/js"></script>

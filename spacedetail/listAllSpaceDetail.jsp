@@ -97,9 +97,10 @@
 	<tr>
 		<th>場地明細ID</th>
 		<th>場地ID</th>
-		<th>場地開放時間</th>
+		<th>場地開放日期</th>
+		<th>場地開放起始時間</th>
+		<th>場地開放結束時間</th>
 		<th>場地租借費用</th>
-		<th>場地介紹</th>
 	</tr>
 	<%@ include file="page1.file" %> 
 	<c:forEach var="spaceDetailVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
@@ -108,8 +109,9 @@
 			<td>${spaceDetailVO.spaceDetailId}</td>
 			<td>${spaceDetailVO.spaceId}</td>
 			<td>${spaceDetailVO.spaceDetailFreeDate}</td>
+			<td>${spaceDetailVO.spaceDetailFreeTimeStart}</td>
+			<td>${spaceDetailVO.spaceDetailFreeTimeEnd}</td>
 			<td>${spaceDetailVO.spaceDetailCharge}</td>
-			<td>${spaceDetailVO.spaceDetailText}</td>
 			
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/spacedetail/spacedetail.do" style="margin-bottom: 0px;">
@@ -135,7 +137,6 @@
 <!-- COMMON SCRIPTS -->
   	<script src="<%=request.getContextPath()%>/plugins/js/common_scripts.js"></script>
   	<script src="<%=request.getContextPath()%>/plugins/js/main.js"></script>
-	<script src="<%=request.getContextPath()%>/plugins/assets/validate.js"></script>
 	
 <!-- Map -->
 	<script src="http://maps.googleapis.com/maps/api/js"></script>

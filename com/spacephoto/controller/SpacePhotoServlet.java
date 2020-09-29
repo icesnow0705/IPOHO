@@ -32,7 +32,7 @@ public class SpacePhotoServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		
-		if ("getOne_For_Display".equals(action)) { // ¨Ó¦ÛSpaceDetail_Home.jspªº½Ğ¨D
+		if ("getOne_For_Display".equals(action)) { // ä¾†è‡ªSpaceDetail_Home.jspçš„è«‹æ±‚
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -40,52 +40,52 @@ public class SpacePhotoServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				/*************************** 1.±µ¦¬½Ğ¨D°Ñ¼Æ - ¿é¤J®æ¦¡ªº¿ù»~³B²z **********************/
+				/*************************** 1.æ¥æ”¶è«‹æ±‚åƒæ•¸ - è¼¸å…¥æ ¼å¼çš„éŒ¯èª¤è™•ç† **********************/
 				String str = req.getParameter("spacePhotoId");
 				if (str == null || (str.trim()).length() == 0) {
-					errorMsgs.add("½Ğ¿é¤J³õ¦a¹Ï¤ùID");
+					errorMsgs.add("è«‹è¼¸å…¥å ´åœ°åœ–ç‰‡ID");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req.getRequestDispatcher("/spacephoto/spacePhotoHome.jsp");
 					failureView.forward(req, res);
-					return;// µ{¦¡¤¤Â_
+					return;// ç¨‹å¼ä¸­æ–·
 				}
 
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req.getRequestDispatcher("/spacephoto/spacePhotoHome.jsp");
 					failureView.forward(req, res);
-					return;// µ{¦¡¤¤Â_
+					return;// ç¨‹å¼ä¸­æ–·
 				}
 
-				/*************************** 2.¶}©l¬d¸ß¸ê®Æ *****************************************/
+				/*************************** 2.é–‹å§‹æŸ¥è©¢è³‡æ–™ *****************************************/
 				SpacePhotoService spacePhotoSvc = new SpacePhotoService();
 				SpacePhotoVO spacePhotoVO = spacePhotoSvc.selectOneSpacePhoto(str);
 				if (spacePhotoVO == null) {
-					errorMsgs.add("¬dµL¸ê®Æ");
+					errorMsgs.add("æŸ¥ç„¡è³‡æ–™");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req.getRequestDispatcher("/spacephoto/spacePhotoHome.jsp");
 					failureView.forward(req, res);
-					return;// µ{¦¡¤¤Â_
+					return;// ç¨‹å¼ä¸­æ–·
 				}
 
-				/*************************** 3.¬d¸ß§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view) *************/
+				/*************************** 3.æŸ¥è©¢å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view) *************/
 				req.setAttribute("spacePhotoVO", spacePhotoVO); 
 				String url = "/spacephoto/listOneSpacePhoto.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
-				/*************************** ¨ä¥L¥i¯àªº¿ù»~³B²z *************************************/
+				/*************************** å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç† *************************************/
 			} catch (Exception e) {
-				errorMsgs.add("µLªk¨ú±o¸ê®Æ:" + e.getMessage());
+				errorMsgs.add("ç„¡æ³•å–å¾—è³‡æ–™:" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/spacephoto/spacePhotoHome.jsp");
 				failureView.forward(req, res);
 			}
 		}
 		
-		if ("getOne_For_Update".equals(action)) { // ¨Ó¦ÛlistAllSpaceDetail.jspªº½Ğ¨D
+		if ("getOne_For_Update".equals(action)) { // ä¾†è‡ªlistAllSpaceDetail.jspçš„è«‹æ±‚
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -93,22 +93,22 @@ public class SpacePhotoServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				/*************************** 1.±µ¦¬½Ğ¨D°Ñ¼Æ ****************************************/
+				/*************************** 1.æ¥æ”¶è«‹æ±‚åƒæ•¸ ****************************************/
 				String spacePhotoId = req.getParameter("spacePhotoId");
 
-				/*************************** 2.¶}©l¬d¸ß¸ê®Æ ****************************************/
+				/*************************** 2.é–‹å§‹æŸ¥è©¢è³‡æ–™ ****************************************/
 				SpacePhotoService spacePhotoSvc = new SpacePhotoService();
 				SpacePhotoVO spacePhotoVO = spacePhotoSvc.selectOneSpacePhoto(spacePhotoId);
 
-				/*************************** 3.¬d¸ß§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view) ************/
+				/*************************** 3.æŸ¥è©¢å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view) ************/
 				req.setAttribute("spacePhotoVO", spacePhotoVO);
 				String url = "/spacephoto/updateSpacePhoto.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
-				/*************************** ¨ä¥L¥i¯àªº¿ù»~³B²z **********************************/
+				/*************************** å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç† **********************************/
 			} catch (Exception e) {
-				errorMsgs.add("µLªk¨ú±o­n­×§ïªº¸ê®Æ:" + e.getMessage());
+				errorMsgs.add("ç„¡æ³•å–å¾—è¦ä¿®æ”¹çš„è³‡æ–™:" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/spacephoto/listAllSpacePhoto.jsp");
 				failureView.forward(req, res);
 			}
@@ -121,19 +121,19 @@ public class SpacePhotoServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMessages);
 			
 			try {
-				/*************************** 1.±µ¦¬½Ğ¨D°Ñ¼Æ - ¿é¤J®æ¦¡ªº¿ù»~³B²z **********************/
+				/*************************** 1.æ¥æ”¶è«‹æ±‚åƒæ•¸ - è¼¸å…¥æ ¼å¼çš„éŒ¯èª¤è™•ç† **********************/
 
 				String spacePhotoId = new String(req.getParameter("spacePhotoId").trim());
 				if (spacePhotoId == null || spacePhotoId.trim().length() == 0) {
-					errorMessages.add("³õ¦a¹Ï¤ùID½Ğ¤ÅªÅ¥Õ");
+					errorMessages.add("å ´åœ°åœ–ç‰‡IDè«‹å‹¿ç©ºç™½");
 				}
 
 				String spaceId = req.getParameter("spaceId");
 				if (spaceId == null || spaceId.trim().length() == 0) {
-					errorMessages.add("³õ¦aID½Ğ¤ÅªÅ¥Õ");
+					errorMessages.add("å ´åœ°IDè«‹å‹¿ç©ºç™½");
 				}
 
-//				·s¼W¹Ï¤ù¡A­YµL¹Ï¤ù«h¹w³]¶ë¤J¹Ï¤ù
+//				æ–°å¢åœ–ç‰‡ï¼Œè‹¥ç„¡åœ–ç‰‡å‰‡é è¨­å¡å…¥åœ–ç‰‡
 				byte[] spacePhoto = null;
 				Part part = req.getPart("spacePhoto");
 				InputStream in = part.getInputStream();
@@ -166,22 +166,22 @@ public class SpacePhotoServlet extends HttpServlet {
 					req.setAttribute("spacePhotoVO", spacePhotoVO);
 					RequestDispatcher failureView = req.getRequestDispatcher("/spacephoto/updateSpacePhoto.jsp");
 					failureView.forward(req, res);
-					return; // µ{¦¡¤¤Â_
+					return; // ç¨‹å¼ä¸­æ–·
 				}
 
-				/*************************** 2.¶}©l­×§ï¸ê®Æ *****************************************/
+				/*************************** 2.é–‹å§‹ä¿®æ”¹è³‡æ–™ *****************************************/
 				SpacePhotoService spacePhotoSvc = new SpacePhotoService();
 				spacePhotoVO = spacePhotoSvc.updateSpacePhoto(spacePhotoId, spaceId, spacePhoto);
 				System.out.println(spacePhotoVO);
-				/*************************** 3.­×§ï§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view) *************/
+				/*************************** 3.ä¿®æ”¹å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view) *************/
 				req.setAttribute("spacePhotoVO", spacePhotoVO); 
 				String url = "/spacephoto/listOneSpacePhoto.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // ­×§ï¦¨¥\«á,Âà¥ælistOneSpacePhoto.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url); // ä¿®æ”¹æˆåŠŸå¾Œ,è½‰äº¤listOneSpacePhoto.jsp
 				successView.forward(req, res);
 				
-				/*************************** ¨ä¥L¥i¯àªº¿ù»~³B²z *************************************/
+				/*************************** å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç† *************************************/
 			} catch (Exception e) {
-				errorMessages.add("­×§ï¸ê®Æ¥¢±Ñ:" + e.getMessage());
+				errorMessages.add("ä¿®æ”¹è³‡æ–™å¤±æ•—:" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/spacephoto/updateSpacePhoto.jsp");
 				failureView.forward(req, res);
 			}
@@ -194,19 +194,19 @@ public class SpacePhotoServlet extends HttpServlet {
 			req.setAttribute("errorMessages", errorMessages);
 
 			try {
-				/*************************** 1.±µ¦¬½Ğ¨D°Ñ¼Æ - ¿é¤J®æ¦¡ªº¿ù»~³B²z **********************/
+				/*************************** 1.æ¥æ”¶è«‹æ±‚åƒæ•¸ - è¼¸å…¥æ ¼å¼çš„éŒ¯èª¤è™•ç† **********************/
 				System.out.println("Test1");
 				String spacePhotoId = new String(req.getParameter("spacePhotoId").trim());
 				if (spacePhotoId == null || spacePhotoId.trim().length() == 0) {
-					errorMessages.add("³õ¦a¹Ï¤ùID½Ğ¤ÅªÅ¥Õ");
+					errorMessages.add("å ´åœ°åœ–ç‰‡IDè«‹å‹¿ç©ºç™½");
 				}
 				System.out.println("Test2");
 				String spaceId = req.getParameter("spaceId");
 				if (spaceId == null || spaceId.trim().length() == 0) {
-					errorMessages.add("³õ¦aID½Ğ¤ÅªÅ¥Õ");
+					errorMessages.add("å ´åœ°IDè«‹å‹¿ç©ºç™½");
 				}
 				System.out.println("Test3");
-//				·s¼W¤@­Ó§t¦³¹Ï¤ù¸ê®ÆªºspacePhoto
+//				æ–°å¢ä¸€å€‹å«æœ‰åœ–ç‰‡è³‡æ–™çš„spacePhoto
 				byte[] spacePhoto = null;
 				Part part = req.getPart("spacePhoto");
 				InputStream in = part.getInputStream();
@@ -241,19 +241,19 @@ public class SpacePhotoServlet extends HttpServlet {
 					req.setAttribute("spacePhotoVO", spacePhotoVO);
 					RequestDispatcher failureView = req.getRequestDispatcher("/spacephoto/updateSpacePhoto.jsp");
 					failureView.forward(req, res);
-					return; // µ{¦¡¤¤Â_
+					return; // ç¨‹å¼ä¸­æ–·
 				}
-				/*************************** 2.¶}©l·s¼W¸ê®Æ ***************************************/
+				/*************************** 2.é–‹å§‹æ–°å¢è³‡æ–™ ***************************************/
 				SpacePhotoService spacePhotoSvc = new SpacePhotoService();
 				spacePhotoVO = spacePhotoSvc.addSpacePhoto(spacePhotoId, spaceId, spacePhoto);
 				System.out.println(spacePhotoVO);
 				
-				/*************************** 3.·s¼W§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view) ***********/
+				/*************************** 3.æ–°å¢å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view) ***********/
 				String url = "/spacephoto/listAllSpacePhoto.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
-				/*************************** ¨ä¥L¥i¯àªº¿ù»~³B²z **********************************/
+				/*************************** å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç† **********************************/
 			} catch (Exception e) {
 				e.printStackTrace();
 				errorMessages.add(e.getMessage());
@@ -270,21 +270,21 @@ public class SpacePhotoServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				/*************************** 1.±µ¦¬½Ğ¨D°Ñ¼Æ ***************************************/
+				/*************************** 1.æ¥æ”¶è«‹æ±‚åƒæ•¸ ***************************************/
 				String spacePhotoId = new String(req.getParameter("spacePhotoId"));
 
-				/*************************** 2.¶}©l§R°£¸ê®Æ ***************************************/
+				/*************************** 2.é–‹å§‹åˆªé™¤è³‡æ–™ ***************************************/
 				SpacePhotoService spacePhotoSvc = new SpacePhotoService();
 				spacePhotoSvc.deleteSpacePhoto(spacePhotoId);
 
-				/*************************** 3.§R°£§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view) ***********/
+				/*************************** 3.åˆªé™¤å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view) ***********/
 				String url = "/spacephoto/listAllSpacePhoto.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// §R°£¦¨¥\«á,Âà¥æ¦^°e¥X§R°£ªº¨Ó·½ºô­¶
+				RequestDispatcher successView = req.getRequestDispatcher(url);// åˆªé™¤æˆåŠŸå¾Œ,è½‰äº¤å›é€å‡ºåˆªé™¤çš„ä¾†æºç¶²é 
 				successView.forward(req, res);
 
-				/*************************** ¨ä¥L¥i¯àªº¿ù»~³B²z **********************************/
+				/*************************** å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç† **********************************/
 			} catch (Exception e) {
-				errorMsgs.add("§R°£¸ê®Æ¥¢±Ñ:" + e.getMessage());
+				errorMsgs.add("åˆªé™¤è³‡æ–™å¤±æ•—:" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/spacephoto/listAllSpacePhoto.jsp");
 				failureView.forward(req, res);
 			}

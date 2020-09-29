@@ -120,6 +120,10 @@
 		<td><input type="TEXT" name="spaceName" size="45" value="<%=spaceVO.getSpaceName()%>" /></td>
 	</tr>
 	<tr>
+		<td>場地介紹:</td>
+		<td><input type="TEXT" name="spaceText" size="45" value="<%=spaceVO.getSpaceText()%>" /></td>
+	</tr>
+	<tr>
 		<td>場地類型:</td>
 		<td><input type="TEXT" name="spaceType" size="45" value="<%=spaceVO.getSpaceType()%>" /></td>
 	</tr>
@@ -173,7 +177,6 @@
 <!-- COMMON SCRIPTS -->
   	<script src="<%=request.getContextPath()%>/plugins/js/common_scripts.js"></script>
   	<script src="<%=request.getContextPath()%>/plugins/js/main.js"></script>
-	<script src="<%=request.getContextPath()%>/plugins/assets/validate.js"></script>
 	
 <!-- Map -->
 	<script src="http://maps.googleapis.com/maps/api/js"></script>

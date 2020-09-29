@@ -8,25 +8,25 @@ import java.util.List;
 
 public class TestDate {
 	/**
-	 * ¥\¯à´y­z: Àò¨ú®É¶¡¬q¤ºªº¾ãÂI¤p®É
+	 * åŠŸèƒ½æè¿°: ç²å–æ™‚é–“æ®µå…§çš„æ•´é»å°æ™‚
 	 * 
-	 * @³Ğ«Ø¤H jl
-	 * @¤é´Á 2019/3/18
-	 * @°Ñ¼Æ[dBegin, dEnd] @ªğ¦^­È java.util.List<java.lang.String>
+	 * @å‰µå»ºäºº jl
+	 * @æ—¥æœŸ 2019/3/18
+	 * @åƒæ•¸[dBegin, dEnd] @è¿”å›å€¼ java.util.List<java.lang.String>
 	 */
 	public List<String> findDates(Date dBegin, Date dEnd) {
 		List<String> lDate = new ArrayList<String>();
 		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH");
 		lDate.add(sd.format(dBegin));
 		Calendar calBegin = Calendar.getInstance();
-		// ¨Ï¥Îµ¹©wªº Date ³]¸m¦¹ Calendar ªº®É¶¡
+		// ä½¿ç”¨çµ¦å®šçš„ Date è¨­ç½®æ­¤ Calendar çš„æ™‚é–“
 		calBegin.setTime(dBegin);
 		Calendar calEnd = Calendar.getInstance();
-		// ¨Ï¥Îµ¹©wªº Date ³]¸m¦¹ Calendar ªº®É¶¡
+		// ä½¿ç”¨çµ¦å®šçš„ Date è¨­ç½®æ­¤ Calendar çš„æ™‚é–“
 		calEnd.setTime(dEnd);
-		// ´ú¸Õ¦¹¤é´Á¬O§_¦b«ü©w¤é´Á¤§«á
+		// æ¸¬è©¦æ­¤æ—¥æœŸæ˜¯å¦åœ¨æŒ‡å®šæ—¥æœŸä¹‹å¾Œ
 		while (dEnd.after(calBegin.getTime())) {
-			// ®Ú¾Ú¤é¾äªº³W«h¡A¬°µ¹©wªº¤é¾ä¦r¬q²K¥[©Î´î¥h«ü©wªº®É¶¡¶q
+			// æ ¹æ“šæ—¥æ›†çš„è¦å‰‡ï¼Œç‚ºçµ¦å®šçš„æ—¥æ›†å­—æ®µæ·»åŠ æˆ–æ¸›å»æŒ‡å®šçš„æ™‚é–“é‡
 			calBegin.add(Calendar.HOUR, 1);
 			lDate.add(sd.format(calBegin.getTime()));
 		}

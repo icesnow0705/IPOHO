@@ -156,7 +156,7 @@
 				<div class="col-md-3">
 					<div class="form-group">
 						<label>場地類型</label>
-						<div class="styled-select">
+						<div class="styled2-select">
 							<select name="spaceType">
 							 <option>會議</option>
 							 <option>聚會</option>
@@ -176,6 +176,16 @@
 					<div class="form-group">
 						<label>場地容納人數</label>
 						<input type="text" name="spaceContain" class="form-control" value="10">
+					</div>
+				</div>
+			</div>
+			<!-- /row-->
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label>場地介紹</label>
+<%-- 					<div class="editor"></div>     --%>
+						<input type="text" name="spaceText" class="form-control" value="新增的場地介紹">
 					</div>
 				</div>
 			</div>			
@@ -203,7 +213,7 @@
 				<div class="col-md-3">
 					<div class="form-group">
 						<label>場地狀態</label>
-						<div class="styled-select">
+						<div class="styled2-select">
 							<select name="spaceStatus">
 							 <option>o</option>
 							 <option>c</option>							 
@@ -242,29 +252,10 @@
 <!--/main-->
 </div>
 <!-- page -->
-
-<!-- WYSIWYG Editor -->
-  	<script src="<%=request.getContextPath()%>/plugins/js/editor/summernote-bs4.min.js"></script>
-    <script>
-      $('.editor').summernote({
-    fontSizes: ['10', '14'],
-    toolbar: [
-      // [groupName, [list of button]]
-      ['style', ['bold', 'italic', 'underline', 'clear']],
-      ['font', ['strikethrough']],
-      ['fontsize', ['fontsize']],
-      ['para', ['ul', 'ol', 'paragraph']]
-      ],
-        placeholder: 'Write here your description....',
-        tabsize: 2,
-        height: 200
-      });
-    </script>
     
 <!-- COMMON SCRIPTS -->
   	<script src="<%=request.getContextPath()%>/plugins/js/common_scripts.js"></script>
   	<script src="<%=request.getContextPath()%>/plugins/js/main.js"></script>
-	<script src="<%=request.getContextPath()%>/plugins/assets/validate.js"></script>
 	
 <!-- Map -->
 	<script src="http://maps.googleapis.com/maps/api/js"></script>
@@ -286,94 +277,4 @@
 	</script>
 </body>
 
-
-
-<!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
-
-<% 
-  java.sql.Date signupDate = null;
-  try {
-	    signupDate = spaceVO.getSpaceSignupDate();
-   } catch (Exception e) {
-	    signupDate = new java.sql.Date(System.currentTimeMillis());
-   }
-%>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
-
-<style>
-  .xdsoft_datetimepicker .xdsoft_datepicker {
-           width:  300px;   /* width:  300px; */
-  }
-  .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-           height: 151px;   /* height:  151px; */
-  }
-</style>
-
-<script>
-        $.datetimepicker.setLocale('zh');
-        $('#f_date1').datetimepicker({
-	       theme: '',              //theme: 'dark',
-	       timepicker:false,       //timepicker:true,
-	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
-	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
-		   value: '<%=signupDate%>', // value:   new Date(),
-           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-           //startDate:	            '2017/07/10',  // 起始日
-           //minDate:               '-1970-01-01', // 去除今日(不含)之前
-           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-        });
-        
-        
-   
-        // ----------------------------------------------------------以下用來排定無法選擇的日期-----------------------------------------------------------
-
-        //      1.以下為某一天之前的日期無法選擇
-        //      var somedate1 = new Date('2017-06-15');
-        //      $('#f_date1').datetimepicker({
-        //          beforeShowDay: function(date) {
-        //        	  if (  date.getYear() <  somedate1.getYear() || 
-        //		           (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
-        //		           (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
-        //              ) {
-        //                   return [false, ""]
-        //              }
-        //              return [true, ""];
-        //      }});
-
-        
-        //      2.以下為某一天之後的日期無法選擇
-        //      var somedate2 = new Date('2017-06-15');
-        //      $('#f_date1').datetimepicker({
-        //          beforeShowDay: function(date) {
-        //        	  if (  date.getYear() >  somedate2.getYear() || 
-        //		           (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
-        //		           (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
-        //              ) {
-        //                   return [false, ""]
-        //              }
-        //              return [true, ""];
-        //      }});
-
-
-        //      3.以下為兩個日期之外的日期無法選擇 (也可按需要換成其他日期)
-        //      var somedate1 = new Date('2017-06-15');
-        //      var somedate2 = new Date('2017-06-25');
-        //      $('#f_date1').datetimepicker({
-        //          beforeShowDay: function(date) {
-        //        	  if (  date.getYear() <  somedate1.getYear() || 
-        //		           (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
-        //		           (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
-        //		             ||
-        //		            date.getYear() >  somedate2.getYear() || 
-        //		           (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
-        //		           (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
-        //              ) {
-        //                   return [false, ""]
-        //              }
-        //              return [true, ""];
-        //      }});
-        
-</script>
 </html>

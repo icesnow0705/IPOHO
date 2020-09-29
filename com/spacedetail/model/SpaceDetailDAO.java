@@ -17,7 +17,7 @@ public class SpaceDetailDAO implements SpaceDetailDAO_interface {
 	String passwd = "123456";
 	
 	private static final String INSERT_STMT =
-			"INSERT INTO SPACE_DETAIL VALUES (SPACE_DETAIL_ID_SEQ.NEXTVAL,?,?,?,?)";
+			"INSERT INTO SPACE_DETAIL VALUES (SPACE_DETAIL_ID_SEQ.NEXTVAL,?,?,?,?,?)";
 	private static final String SELECT_ALL_STMT =
 			"SELECT * FROM SPACE_DETAIL order by SPACE_DETAIL_ID";
 	private static final String SELECT_ONE_STMT =
@@ -25,7 +25,7 @@ public class SpaceDetailDAO implements SpaceDetailDAO_interface {
 	private static final String DELETE =
 			"DELETE FROM SPACE_DETAIL where SPACE_DETAIL_ID = ?";
 	private static final String UPDATE =
-			"UPDATE SPACE_DETAIL set SPACE_ID=?,SPACE_DETAIL_FREEDATE=?,SPACE_DETAIL_CHARGE=?,SAPCE_DETAIL_TEXT? where SPACE_DETAIL_ID=?";
+			"UPDATE SPACE_DETAIL set SPACE_ID=?,SPACE_DETAIL_FREEDATE=?,SPACE_DETAIL_FREETIME_START=?,SPACE_DETAIL_FREETIME_END=?,SPACE_DETAIL_CHARGE=? where SPACE_DETAIL_ID=?";
 	
 	@Override
 	public void insert(SpaceDetailVO spaceDetailVO) {
@@ -39,8 +39,9 @@ public class SpaceDetailDAO implements SpaceDetailDAO_interface {
 			
 			ptmt.setString(1, spaceDetailVO.getSpaceId());
 			ptmt.setDate(2, spaceDetailVO.getSpaceDetailFreeDate());
-			ptmt.setInt(3, spaceDetailVO.getSpaceDetailCharge());
-			ptmt.setString(4, spaceDetailVO.getSpaceDetailText());
+			ptmt.setTimestamp(3, spaceDetailVO.getSpaceDetailFreeTimeStart());
+			ptmt.setTimestamp(4, spaceDetailVO.getSpaceDetailFreeTimeEnd());
+			ptmt.setInt(5, spaceDetailVO.getSpaceDetailCharge());
 				
 			ptmt.executeUpdate();
 			
@@ -114,9 +115,10 @@ public class SpaceDetailDAO implements SpaceDetailDAO_interface {
 			
 			ptmt.setString(1, spaceDetailVO.getSpaceId());
 			ptmt.setDate(2, spaceDetailVO.getSpaceDetailFreeDate());
-			ptmt.setInt(3, spaceDetailVO.getSpaceDetailCharge());
-			ptmt.setString(4, spaceDetailVO.getSpaceDetailText());
-			ptmt.setString(5, spaceDetailVO.getSpaceDetailId());
+			ptmt.setTimestamp(3, spaceDetailVO.getSpaceDetailFreeTimeStart());
+			ptmt.setTimestamp(4, spaceDetailVO.getSpaceDetailFreeTimeEnd());
+			ptmt.setInt(5, spaceDetailVO.getSpaceDetailCharge());
+			ptmt.setString(6, spaceDetailVO.getSpaceDetailId());
 
 			ptmt.executeUpdate();
 			
@@ -162,8 +164,9 @@ public class SpaceDetailDAO implements SpaceDetailDAO_interface {
 				spaceDetailVO.setSpaceDetailId(rs.getString("SPACE_DETAIL_ID"));
 				spaceDetailVO.setSpaceId(rs.getString("SPACE_ID"));
 				spaceDetailVO.setSpaceDetailFreeDate(rs.getDate("SPACE_DETAIL_FREEDATE"));
+				spaceDetailVO.setSpaceDetailFreeTimeStart(rs.getTimestamp("SPACE_DETAIL_FREETIME_START"));
+				spaceDetailVO.setSpaceDetailFreeTimeEnd(rs.getTimestamp("SPACE_DETAIL_FREETIME_END"));
 				spaceDetailVO.setSpaceDetailCharge(rs.getInt("SPACE_DETAIL_CHARGE"));
-				spaceDetailVO.setSpaceDetailText(rs.getString("SPACE_DETAIL_TEXT"));
 			}
 
 		} catch (ClassNotFoundException e) {
@@ -215,8 +218,9 @@ public class SpaceDetailDAO implements SpaceDetailDAO_interface {
 				spaceDetailVO.setSpaceDetailId(rs.getString("SPACE_DETAIL_ID"));
 				spaceDetailVO.setSpaceId(rs.getString("SPACE_ID"));
 				spaceDetailVO.setSpaceDetailFreeDate(rs.getDate("SPACE_DETAIL_FREEDATE"));
+				spaceDetailVO.setSpaceDetailFreeTimeStart(rs.getTimestamp("SPACE_DETAIL_FREETIME_START"));
+				spaceDetailVO.setSpaceDetailFreeTimeEnd(rs.getTimestamp("SPACE_DETAIL_FREETIME_END"));
 				spaceDetailVO.setSpaceDetailCharge(rs.getInt("SPACE_DETAIL_CHARGE"));
-				spaceDetailVO.setSpaceDetailText(rs.getString("SPACE_DETAIL_TEXT"));
 				
 				list.add(spaceDetailVO);
 			}

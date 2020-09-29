@@ -89,13 +89,17 @@
 	<tr>
 		<th>場地明細ID</th>
 		<th>場地ID</th>
-		<th>場地開放時間</th>
+		<th>場地開放日期</th>
+		<th>場地開放起始時間</th>
+		<th>場地開放結束時間</th>
 		<th>場地租借費用</th>
 	</tr>
 	<tr>
 		<td><%=spaceDetailVO.getSpaceDetailId()%></td>
 		<td><%=spaceDetailVO.getSpaceId()%></td>
 		<td><%=spaceDetailVO.getSpaceDetailFreeDate()%></td>
+		<td><%=spaceDetailVO.getSpaceDetailFreeTimeStart()%></td>
+		<td><%=spaceDetailVO.getSpaceDetailFreeTimeEnd()%></td>
 		<td><%=spaceDetailVO.getSpaceDetailCharge()%></td>
 	</tr>
 </table>
@@ -107,7 +111,6 @@
 <!-- COMMON SCRIPTS -->
   	<script src="<%=request.getContextPath()%>/plugins/js/common_scripts.js"></script>
   	<script src="<%=request.getContextPath()%>/plugins/js/main.js"></script>
-	<script src="<%=request.getContextPath()%>/plugins/assets/validate.js"></script>
 	
 <!-- Map -->
 	<script src="http://maps.googleapis.com/maps/api/js"></script>

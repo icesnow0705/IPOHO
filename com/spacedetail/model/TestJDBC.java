@@ -12,31 +12,14 @@ public class TestJDBC {
 		
 		SpaceDetailDAO_interface dao = new SpaceDetailDAO();
 		
-//		ByteArrayOutputStream baos = null;
-//		try {
-//			File file = new File("C:\\Users\\user\\Desktop\\allshit.gif");
-//			File file = new File("C:\\Users\\HENRYZ\\Desktop\\zzz.jpg");
-//			FileInputStream fis = new FileInputStream(file);
-//			baos = new ByteArrayOutputStream();
-//			byte[] buffer = new byte[8192];
-//			int i;
-//			while ((i = fis.read(buffer)) != -1) {
-//				baos.write(buffer, 0, i);
-//			}
-//			baos.close();
-//			fis.close();
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-		
 		//All
 //		List<SpaceDetailVO> list = dao.getAll();
 //		for(SpaceDetailVO spaceDetailVO : list) {
 //			System.out.println(spaceDetailVO.getSpaceDetailId());
 //			System.out.println(spaceDetailVO.getSpaceId());
 //			System.out.println(spaceDetailVO.getSpaceDetailFreeDate());
+//			System.out.println(spaceDetailVO.getSpaceDetailFreeTimeStart());
+//			System.out.println(spaceDetailVO.getSpaceDetailFreeTimeEnd());
 //			System.out.println(spaceDetailVO.getSpaceDetailCharge());
 //		}		
 //		System.out.println("Test All");
@@ -46,6 +29,8 @@ public class TestJDBC {
 //		System.out.println(one.getSpaceDetailId());
 //		System.out.println(one.getSpaceId());
 //		System.out.println(one.getSpaceDetailFreeDate());
+//		System.out.println(one.getSpaceDetailFreeTimeStart());
+//		System.out.println(one.getSpaceDetailFreeTimeEnd());
 //		System.out.println(one.getSpaceDetailCharge());
 //		System.out.println("Test One");
 		
@@ -53,13 +38,14 @@ public class TestJDBC {
 //		SpaceDetailVO add = new SpaceDetailVO();
 //		add.setSpaceId("SPACE00001");
 //		add.setSpaceDetailFreeDate(java.sql.Date.valueOf("2020-09-21"));
+//		add.setSpaceDetailFreeTimeStart(java.sql.Timestamp.valueOf("2020-09-21 02:00:00.0"));
+//		add.setSpaceDetailFreeTimeEnd(java.sql.Timestamp.valueOf("2020-09-21 15:00:00.0"));
 //		add.setSpaceDetailCharge(870);
-//		add.setSpaceDetailText("spaceText");
 //		dao.insert(add);
 //		System.out.println("Data Inserted");
 		
 		//delete
-//		dao.delete("4");
+//		dao.delete("5");
 //		System.out.println("Data Deleted");
 		
 		//update
@@ -67,8 +53,9 @@ public class TestJDBC {
 		update.setSpaceDetailId("SD00003");
 		update.setSpaceId("SPACE00001");
 		update.setSpaceDetailFreeDate(java.sql.Date.valueOf("2020-09-01"));
+		update.setSpaceDetailFreeTimeStart(java.sql.Timestamp.valueOf("2020-09-01 13:00:00.0"));
+		update.setSpaceDetailFreeTimeEnd(java.sql.Timestamp.valueOf("2020-09-01 23:00:00.0"));
 		update.setSpaceDetailCharge(780);
-		update.setSpaceDetailText("spaceText");
 		dao.update(update);
 		System.out.println("data updated");
 		

@@ -100,8 +100,16 @@
 		<td><input type="TEXT" name="spaceId" size="45" value="<%=spaceDetailVO.getSpaceId()%>" /></td>
 	</tr>
 	<tr>
-		<td>場地開放時間:</td>
+		<td>場地開放日期:</td>
 		<td><input name="spaceDetailFreeDate" id="f_date1" type="text" value="<%=spaceDetailVO.getSpaceDetailFreeDate()%>" ></td>
+	</tr>
+	<tr>
+		<td>場地開放起始時間:</td>
+		<td><input name="spaceDetailFreeTimeStart" id="f_date1" type="text" value="<%=spaceDetailVO.getSpaceDetailFreeTimeStart()%>" ></td>
+	</tr>
+	<tr>
+		<td>場地開放結束時間:</td>
+		<td><input name="spaceDetailFreeTimeEnd" id="f_date1" type="text" value="<%=spaceDetailVO.getSpaceDetailFreeTimeEnd()%>" ></td>
 	</tr>
 	<tr>
 		<td>場地租借費用:</td>
@@ -121,7 +129,6 @@
 <!-- COMMON SCRIPTS -->
   	<script src="<%=request.getContextPath()%>/plugins/js/common_scripts.js"></script>
   	<script src="<%=request.getContextPath()%>/plugins/js/main.js"></script>
-	<script src="<%=request.getContextPath()%>/plugins/assets/validate.js"></script>
 	
 <!-- Map -->
 	<script src="http://maps.googleapis.com/maps/api/js"></script>

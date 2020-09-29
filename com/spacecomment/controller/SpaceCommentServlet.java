@@ -41,52 +41,52 @@ public class SpaceCommentServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				/*************************** 1.±µ¦¬½Ğ¨D°Ñ¼Æ - ¿é¤J®æ¦¡ªº¿ù»~³B²z **********************/
+				/*************************** 1.æ¥æ”¶è«‹æ±‚åƒæ•¸ - è¼¸å…¥æ ¼å¼çš„éŒ¯èª¤è™•ç† **********************/
 				String str = req.getParameter("spaceCommentId");
 				if (str == null || (str.trim()).length() == 0) {
-					errorMsgs.add("½Ğ¿é¤J³õ¦a©ú²ÓID");
+					errorMsgs.add("è«‹è¼¸å…¥å ´åœ°æ˜ç´°ID");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req.getRequestDispatcher("/spacecomment/spaceCommentHome.jsp");
 					failureView.forward(req, res);
-					return;// µ{¦¡¤¤Â_
+					return;// ç¨‹å¼ä¸­æ–·
 				}
 
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req.getRequestDispatcher("/spacecomment/spaceCommentHome.jsp");
 					failureView.forward(req, res);
-					return;// µ{¦¡¤¤Â_
+					return;// ç¨‹å¼ä¸­æ–·
 				}
 
-				/*************************** 2.¶}©l¬d¸ß¸ê®Æ *****************************************/
+				/*************************** 2.é–‹å§‹æŸ¥è©¢è³‡æ–™ *****************************************/
 				SpaceCommentService spaceCommentSvc = new SpaceCommentService();
 				SpaceCommentVO spaceCommentVO = spaceCommentSvc.selectOneSpaceComment(str);
 				if (spaceCommentVO == null) {
-					errorMsgs.add("¬dµL¸ê®Æ");
+					errorMsgs.add("æŸ¥ç„¡è³‡æ–™");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req.getRequestDispatcher("/spacecomment/spaceCommentHome.jsp");
 					failureView.forward(req, res);
-					return;// µ{¦¡¤¤Â_
+					return;// ç¨‹å¼ä¸­æ–·
 				}
 
-				/*************************** 3.¬d¸ß§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view) *************/
-				req.setAttribute("spaceCommentVO", spaceCommentVO); // ¸ê®Æ®w¨ú¥XªºspaceCommentVOª«¥ó,¦s¤Jreq
+				/*************************** 3.æŸ¥è©¢å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view) *************/
+				req.setAttribute("spaceCommentVO", spaceCommentVO); // è³‡æ–™åº«å–å‡ºçš„spaceCommentVOç‰©ä»¶,å­˜å…¥req
 				String url = "/spacecomment/listOneSpaceComment.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // ¦¨¥\Âà¥æ listOneSpaceComment.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url); // æˆåŠŸè½‰äº¤ listOneSpaceComment.jsp
 				successView.forward(req, res);
 
-				/*************************** ¨ä¥L¥i¯àªº¿ù»~³B²z *************************************/
+				/*************************** å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç† *************************************/
 			} catch (Exception e) {
-				errorMsgs.add("µLªk¨ú±o¸ê®Æ:" + e.getMessage());
+				errorMsgs.add("ç„¡æ³•å–å¾—è³‡æ–™:" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/spacecomment/spaceCommentHome.jsp");
 				failureView.forward(req, res);
 			}
 		}
 		
-		if ("getOne_For_Update".equals(action)) { // ¨Ó¦ÛlistAllSpaceComment.jspªº½Ğ¨D
+		if ("getOne_For_Update".equals(action)) { // ä¾†è‡ªlistAllSpaceComment.jspçš„è«‹æ±‚
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -94,63 +94,63 @@ public class SpaceCommentServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				/*************************** 1.±µ¦¬½Ğ¨D°Ñ¼Æ ****************************************/
+				/*************************** 1.æ¥æ”¶è«‹æ±‚åƒæ•¸ ****************************************/
 				String spaceCommentId = req.getParameter("spaceCommentId");
 
-				/*************************** 2.¶}©l¬d¸ß¸ê®Æ ****************************************/
+				/*************************** 2.é–‹å§‹æŸ¥è©¢è³‡æ–™ ****************************************/
 				SpaceCommentService spaceCommentSvc = new SpaceCommentService();
 				SpaceCommentVO spaceCommentVO = spaceCommentSvc.selectOneSpaceComment(spaceCommentId);
 
-				/*************************** 3.¬d¸ß§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view) ************/
-				req.setAttribute("spaceCommentVO", spaceCommentVO); // ¸ê®Æ®w¨ú¥XªºspaceCommentVOª«¥ó,¦s¤Jreq
+				/*************************** 3.æŸ¥è©¢å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view) ************/
+				req.setAttribute("spaceCommentVO", spaceCommentVO); // è³‡æ–™åº«å–å‡ºçš„spaceCommentVOç‰©ä»¶,å­˜å…¥req
 				String url = "/spacecomment/updateSpaceComment.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// ¦¨¥\Âà¥æ updateSpaceComment.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url);// æˆåŠŸè½‰äº¤ updateSpaceComment.jsp
 				successView.forward(req, res);
 
-				/*************************** ¨ä¥L¥i¯àªº¿ù»~³B²z **********************************/
+				/*************************** å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç† **********************************/
 			} catch (Exception e) {
-				errorMsgs.add("µLªk¨ú±o­n­×§ïªº¸ê®Æ:" + e.getMessage());
+				errorMsgs.add("ç„¡æ³•å–å¾—è¦ä¿®æ”¹çš„è³‡æ–™:" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/spacecomment/listAllSpaceComment.jsp");
 				failureView.forward(req, res);
 			}
 		}
 
-		if ("update".equals(action)) { // ¨Ó¦ÛupdateSpaceComment.jspªº½Ğ¨D
+		if ("update".equals(action)) { // ä¾†è‡ªupdateSpaceComment.jspçš„è«‹æ±‚
 			List<String> errorMessages = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMessages);
 			
 			try {
-				/*************************** 1.±µ¦¬½Ğ¨D°Ñ¼Æ - ¿é¤J®æ¦¡ªº¿ù»~³B²z **********************/
+				/*************************** 1.æ¥æ”¶è«‹æ±‚åƒæ•¸ - è¼¸å…¥æ ¼å¼çš„éŒ¯èª¤è™•ç† **********************/
 
 				String spaceCommentId = new String(req.getParameter("spaceCommentId").trim());
 				if (spaceCommentId == null || spaceCommentId.trim().length() == 0) {
-					errorMessages.add("³õ¦aµû»ùID½Ğ¤ÅªÅ¥Õ");
+					errorMessages.add("å ´åœ°è©•åƒ¹IDè«‹å‹¿ç©ºç™½");
 				}
 
 				String spaceId = req.getParameter("spaceId");
 				if (spaceId == null || spaceId.trim().length() == 0) {
-					errorMessages.add("³õ¦aID½Ğ¤ÅªÅ¥Õ");
+					errorMessages.add("å ´åœ°IDè«‹å‹¿ç©ºç™½");
 				}
 				
 				String memId = req.getParameter("memId");
 				if (memId == null || memId.trim().length() == 0) {
-					errorMessages.add("·|­ûID½Ğ¤ÅªÅ¥Õ");
+					errorMessages.add("æœƒå“¡IDè«‹å‹¿ç©ºç™½");
 				}
 				
 				String spaceCommentContent = req.getParameter("spaceCommentContent");
 				if (spaceCommentContent == null || spaceCommentContent.trim().length() == 0) {
-					errorMessages.add("µû»ù¤º®e½Ğ¤ÅªÅ¥Õ");
+					errorMessages.add("è©•åƒ¹å…§å®¹è«‹å‹¿ç©ºç™½");
 				}
 				
 				Double spaceCommentLevel = null;
 				try {
 					spaceCommentLevel = Double.parseDouble(req.getParameter("spaceCommentLevel").trim());
-					if(spaceCommentLevel <= 0 || spaceCommentLevel > 5) errorMessages.add("³õ¦aµû»ù¬Pµ¥: ½Ğ½T»{");
+					if(spaceCommentLevel <= 0 || spaceCommentLevel > 5) errorMessages.add("å ´åœ°è©•åƒ¹æ˜Ÿç­‰: è«‹ç¢ºèª");
 				} catch (NumberFormatException e) {
 					spaceCommentLevel = 0.0;
-					errorMessages.add("³õ¦aµû»ù¬Pµ¥¿ù»~");
+					errorMessages.add("å ´åœ°è©•åƒ¹æ˜Ÿç­‰éŒ¯èª¤");
 				}
 
 				java.sql.Date spaceCommentDate = null;
@@ -158,7 +158,7 @@ public class SpaceCommentServlet extends HttpServlet {
 					spaceCommentDate = java.sql.Date.valueOf(req.getParameter("spaceCommentDate").trim());
 				} catch (IllegalArgumentException e) {
 					e.printStackTrace();
-					errorMessages.add("³õ¦aµû»ù¤é´Á¿ù»~");
+					errorMessages.add("å ´åœ°è©•åƒ¹æ—¥æœŸéŒ¯èª¤");
 				}
 				
 				
@@ -172,25 +172,25 @@ public class SpaceCommentServlet extends HttpServlet {
 				
 				// Send the use back to the form, if there were errors
 				if (!errorMessages.isEmpty()) {
-					req.setAttribute("spaceCommentVO", spaceCommentVO); // §t¦³¿é¤J®æ¦¡¿ù»~ªºspaceCommentVOª«¥ó,¤]¦s¤Jreq
+					req.setAttribute("spaceCommentVO", spaceCommentVO); // å«æœ‰è¼¸å…¥æ ¼å¼éŒ¯èª¤çš„spaceCommentVOç‰©ä»¶,ä¹Ÿå­˜å…¥req
 					RequestDispatcher failureView = req.getRequestDispatcher("/spacecomment/updateSpaceComment.jsp");
 					failureView.forward(req, res);
-					return; // µ{¦¡¤¤Â_
+					return; // ç¨‹å¼ä¸­æ–·
 				}
 
-				/*************************** 2.¶}©l­×§ï¸ê®Æ *****************************************/
+				/*************************** 2.é–‹å§‹ä¿®æ”¹è³‡æ–™ *****************************************/
 				SpaceCommentService spaceCommentSvc = new SpaceCommentService();
 				spaceCommentVO = spaceCommentSvc.updateSpaceComment(spaceCommentVO);
 				System.out.println(spaceCommentVO);
-				/*************************** 3.­×§ï§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view) *************/
+				/*************************** 3.ä¿®æ”¹å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view) *************/
 				req.setAttribute("spaceCommentVO", spaceCommentVO);
 				String url = "/spacecomment/listOneSpaceComment.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				
-				/*************************** ¨ä¥L¥i¯àªº¿ù»~³B²z *************************************/
+				/*************************** å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç† *************************************/
 			} catch (Exception e) {
-				errorMessages.add("­×§ï¸ê®Æ¥¢±Ñ:" + e.getMessage());
+				errorMessages.add("ä¿®æ”¹è³‡æ–™å¤±æ•—:" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/spacecomment/updateSpaceComment.jsp");
 				failureView.forward(req, res);
 			}
@@ -203,35 +203,35 @@ public class SpaceCommentServlet extends HttpServlet {
 			req.setAttribute("errorMessages", errorMessages);
 
 			try {
-				/*************************** 1.±µ¦¬½Ğ¨D°Ñ¼Æ - ¿é¤J®æ¦¡ªº¿ù»~³B²z **********************/
+				/*************************** 1.æ¥æ”¶è«‹æ±‚åƒæ•¸ - è¼¸å…¥æ ¼å¼çš„éŒ¯èª¤è™•ç† **********************/
 				
 				String spaceCommentId = new String(req.getParameter("spaceCommentId").trim());
 				if (spaceCommentId == null || spaceCommentId.trim().length() == 0) {
-					errorMessages.add("³õ¦aµû»ùID½Ğ¤ÅªÅ¥Õ");
+					errorMessages.add("å ´åœ°è©•åƒ¹IDè«‹å‹¿ç©ºç™½");
 				}
 
 				String spaceId = req.getParameter("spaceId");
 				if (spaceId == null || spaceId.trim().length() == 0) {
-					errorMessages.add("³õ¦aID½Ğ¤ÅªÅ¥Õ");
+					errorMessages.add("å ´åœ°IDè«‹å‹¿ç©ºç™½");
 				}
 				
 				String memId = req.getParameter("memId");
 				if (memId == null || memId.trim().length() == 0) {
-					errorMessages.add("·|­ûID½Ğ¤ÅªÅ¥Õ");
+					errorMessages.add("æœƒå“¡IDè«‹å‹¿ç©ºç™½");
 				}
 				
 				String spaceCommentContent = req.getParameter("spaceCommentContent");
 				if (spaceCommentContent == null || spaceCommentContent.trim().length() == 0) {
-					errorMessages.add("³õ¦aµû»ù¤º®e½Ğ¤ÅªÅ¥Õ");
+					errorMessages.add("å ´åœ°è©•åƒ¹å…§å®¹è«‹å‹¿ç©ºç™½");
 				}
 				
 				Double spaceCommentLevel = null;
 				try {
 					spaceCommentLevel = Double.parseDouble(req.getParameter("spaceCommentLevel").trim());
-					if(spaceCommentLevel <= 0 || spaceCommentLevel > 5) errorMessages.add("³õ¦aµû»ù¬Pµ¥: ½Ğ½T»{");
+					if(spaceCommentLevel <= 0 || spaceCommentLevel > 5) errorMessages.add("å ´åœ°è©•åƒ¹æ˜Ÿç­‰: è«‹ç¢ºèª");
 				} catch (NumberFormatException e) {
 					spaceCommentLevel = 0.0;
-					errorMessages.add("³õ¦aµû»ù¬Pµ¥¿ù»~");
+					errorMessages.add("å ´åœ°è©•åƒ¹æ˜Ÿç­‰éŒ¯èª¤");
 				}
 
 				java.sql.Date spaceCommentDate = null;
@@ -239,7 +239,7 @@ public class SpaceCommentServlet extends HttpServlet {
 					spaceCommentDate = java.sql.Date.valueOf(req.getParameter("spaceCommentDate").trim());
 				} catch (IllegalArgumentException e) {
 					e.printStackTrace();
-					errorMessages.add("³õ¦aµû»ù¤é´Á¿ù»~");
+					errorMessages.add("å ´åœ°è©•åƒ¹æ—¥æœŸéŒ¯èª¤");
 				}
 
 				
@@ -253,22 +253,22 @@ public class SpaceCommentServlet extends HttpServlet {
 				
 				// Send the use back to the form, if there were errors
 				if (!errorMessages.isEmpty()) {
-					req.setAttribute("spaceCommentVO", spaceCommentVO); // §t¦³¿é¤J®æ¦¡¿ù»~ªºspaceCommentVOª«¥ó,¤]¦s¤Jreq
+					req.setAttribute("spaceCommentVO", spaceCommentVO); // å«æœ‰è¼¸å…¥æ ¼å¼éŒ¯èª¤çš„spaceCommentVOç‰©ä»¶,ä¹Ÿå­˜å…¥req
 					RequestDispatcher failureView = req.getRequestDispatcher("/spacecomment/updateSpaceComment.jsp");
 					failureView.forward(req, res);
-					return; // µ{¦¡¤¤Â_
+					return; // ç¨‹å¼ä¸­æ–·
 				}
-				/*************************** 2.¶}©l·s¼W¸ê®Æ ***************************************/
+				/*************************** 2.é–‹å§‹æ–°å¢è³‡æ–™ ***************************************/
 				SpaceCommentService spaceCommentSvc = new SpaceCommentService();
 				spaceCommentVO = spaceCommentSvc.addSpaceComment(spaceCommentVO);
 				System.out.println(spaceCommentVO);
 				
-				/*************************** 3.·s¼W§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view) ***********/
+				/*************************** 3.æ–°å¢å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view) ***********/
 				String url = "/spacecomment/listAllSpaceComment.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
-				/*************************** ¨ä¥L¥i¯àªº¿ù»~³B²z **********************************/
+				/*************************** å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç† **********************************/
 			} catch (Exception e) {
 				e.printStackTrace();
 				errorMessages.add(e.getMessage());
@@ -277,7 +277,7 @@ public class SpaceCommentServlet extends HttpServlet {
 			}
 		}
 
-		if ("delete".equals(action)) { // ¨Ó¦ÛlistAllSpace.jsp
+		if ("delete".equals(action)) { // ä¾†è‡ªlistAllSpace.jsp
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -285,21 +285,21 @@ public class SpaceCommentServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				/*************************** 1.±µ¦¬½Ğ¨D°Ñ¼Æ ***************************************/
+				/*************************** 1.æ¥æ”¶è«‹æ±‚åƒæ•¸ ***************************************/
 				String spaceCommentId = new String(req.getParameter("spaceCommentId"));
 
-				/*************************** 2.¶}©l§R°£¸ê®Æ ***************************************/
+				/*************************** 2.é–‹å§‹åˆªé™¤è³‡æ–™ ***************************************/
 				SpaceCommentService spaceCommentSvc = new SpaceCommentService();
 				spaceCommentSvc.deleteSpaceComment(spaceCommentId);
 
-				/*************************** 3.§R°£§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view) ***********/
+				/*************************** 3.åˆªé™¤å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view) ***********/
 				String url = "/spacecomment/listAllSpaceComment.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// §R°£¦¨¥\«á,Âà¥æ¦^°e¥X§R°£ªº¨Ó·½ºô­¶
+				RequestDispatcher successView = req.getRequestDispatcher(url);// åˆªé™¤æˆåŠŸå¾Œ,è½‰äº¤å›é€å‡ºåˆªé™¤çš„ä¾†æºç¶²é 
 				successView.forward(req, res);
 
-				/*************************** ¨ä¥L¥i¯àªº¿ù»~³B²z **********************************/
+				/*************************** å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç† **********************************/
 			} catch (Exception e) {
-				errorMsgs.add("§R°£¸ê®Æ¥¢±Ñ:" + e.getMessage());
+				errorMsgs.add("åˆªé™¤è³‡æ–™å¤±æ•—:" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/spacecomment/listAllspaceComment.jsp");
 				failureView.forward(req, res);
 			}

@@ -1,3 +1,46 @@
 /*============================================================================================*/
 /* Your custom styles below */
 /*============================================================================================*/
+
+.styled2-select select {
+    background: transparent;
+    width: 107%;
+    padding: 5px;
+    padding-left: 15px;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    height: 41px;
+    color: #868e95;
+    margin: 0;
+    font-weight: 400;
+    -moz-appearance: window;
+    -webkit-appearance: none;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .styled2-select select:focus {
+    color: #555;
+  }
+  
+  .styled2-select {
+    width: 100%;
+    overflow: hidden;
+    height: 44px;
+    background: #fff url(../img/arrow_down.svg) no-repeat right center;
+    border: 1px solid #ced4da;
+    -webkit-border-radius: 0.25rem;
+    -moz-border-radius: 0.25rem;
+    -ms-border-radius: 0.25rem;
+    border-radius: 0.25rem;
+  }
+  
+  .styled2-select select::-ms-expand {
+    display: none;
+  }
+  
+  .styled2-select select:focus {
+    outline: none;
+    box-shadow: none;
+  }

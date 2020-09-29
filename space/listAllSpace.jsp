@@ -101,6 +101,7 @@
 		<th>場地經度</th>
 		<th>場地緯度</th>
 		<th>場地名稱</th>
+		<th>場地介紹</th>
 		<th>場地類型</th>
 		<th>場地設備</th>
 		<th>場地用品</th>
@@ -121,7 +122,8 @@
 			<td>${spaceVO.spaceAddress}</td>
 			<td>${spaceVO.spaceLng}</td>
 			<td>${spaceVO.spaceLat}</td>
-			<td>${spaceVO.spaceName}</td> 
+			<td>${spaceVO.spaceName}</td>
+			<td>${spaceVO.spaceText}</td> 
 			<td>${spaceVO.spaceType}</td>
 			<td>${spaceVO.spaceEquipment}</td>
 			<td>${spaceVO.spaceContain}</td>
@@ -156,7 +158,6 @@
 <!-- COMMON SCRIPTS -->
   	<script src="<%=request.getContextPath()%>/plugins/js/common_scripts.js"></script>
   	<script src="<%=request.getContextPath()%>/plugins/js/main.js"></script>
-	<script src="<%=request.getContextPath()%>/plugins/assets/validate.js"></script>
 	
 <!-- Map -->
 	<script src="http://maps.googleapis.com/maps/api/js"></script>

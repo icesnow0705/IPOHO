@@ -11,6 +11,7 @@ public class SpaceVO {
 	private Double spaceLng;
 	private Double spaceLat;
 	private String spaceName;
+	private String spaceText;
 	private String spaceType;
 	private String spaceEquipment;
 	private String spaceContain;
@@ -63,6 +64,12 @@ public class SpaceVO {
 	}
 	public void setSpaceName(String spaceName) {
 		this.spaceName = spaceName;
+	}
+	public String getSpaceText() {
+		return spaceText;
+	}
+	public void setSpaceText(String spaceText) {
+		this.spaceText = spaceText;
 	}
 	public String getSpaceType() {
 		return spaceType;

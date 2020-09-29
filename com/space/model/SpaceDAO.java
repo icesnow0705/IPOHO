@@ -18,7 +18,7 @@ public class SpaceDAO implements SpaceDAO_interface{
 	
 
 	private static final String INSERT_STMT = 
-	    "INSERT INTO SPACE VALUES (SPACE_ID_SEQ.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	    "INSERT INTO SPACE VALUES (SPACE_ID_SEQ.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String SELECT_ALL_STMT = 
 		"SELECT * FROM SPACE order by SPACE_ID";
 	private static final String SELECT_ONE_STMT = 
@@ -26,7 +26,7 @@ public class SpaceDAO implements SpaceDAO_interface{
 	private static final String DELETE = 
 		"DELETE FROM SPACE where SPACE_ID = ?";
 	private static final String UPDATE = 
-		"UPDATE SPACE set MEMBER_ID=?,EMP_ID=?,SPACE_ADDRESS=?,SPACE_LNG=?,SPACE_LAT=?,SPACE_NAME=?,SPACE_TYPE=?,SPACE_EQUMENT=?,SPACE_CONTAIN=?,SPACE_RULE=?,SPACE_REFUND=?,SPACE_STATUS=?,SPACE_SIGNUP_DATE=?,SPACE_ONSALE_DATE=?,SPACE_OFFSALE_DATE=? where SPACE_ID=?";
+		"UPDATE SPACE set MEMBER_ID=?,EMP_ID=?,SPACE_ADDRESS=?,SPACE_LNG=?,SPACE_LAT=?,SPACE_NAME=?,SPACE_TEXT=?,SPACE_TYPE=?,SPACE_EQUMENT=?,SPACE_CONTAIN=?,SPACE_RULE=?,SPACE_REFUND=?,SPACE_STATUS=?,SPACE_SIGNUP_DATE=?,SPACE_ONSALE_DATE=?,SPACE_OFFSALE_DATE=? where SPACE_ID=?";
 
 	@Override
 	public void insert(SpaceVO spaceVO) {
@@ -44,15 +44,16 @@ public class SpaceDAO implements SpaceDAO_interface{
 			ptmt.setDouble(4, spaceVO.getSpaceLng());
 			ptmt.setDouble(5, spaceVO.getSpaceLat());
 			ptmt.setString(6, spaceVO.getSpaceName());
-			ptmt.setString(7, spaceVO.getSpaceType());
-			ptmt.setString(8, spaceVO.getSpaceEquipment());
-			ptmt.setString(9, spaceVO.getSpaceContain());
-			ptmt.setString(10, spaceVO.getSpaceRule());
-			ptmt.setString(11, spaceVO.getSpaceRefund());
-			ptmt.setString(12, spaceVO.getSpaceStatus());
-			ptmt.setDate(13, spaceVO.getSpaceSignupDate());
-			ptmt.setDate(14, spaceVO.getSpaceOnsaleDate());
-			ptmt.setDate(15, spaceVO.getSpaceOffsaleDate());
+			ptmt.setString(7, spaceVO.getSpaceText());
+			ptmt.setString(8, spaceVO.getSpaceType());
+			ptmt.setString(9, spaceVO.getSpaceEquipment());
+			ptmt.setString(10, spaceVO.getSpaceContain());
+			ptmt.setString(11, spaceVO.getSpaceRule());
+			ptmt.setString(12, spaceVO.getSpaceRefund());
+			ptmt.setString(13, spaceVO.getSpaceStatus());
+			ptmt.setDate(14, spaceVO.getSpaceSignupDate());
+			ptmt.setDate(15, spaceVO.getSpaceOnsaleDate());
+			ptmt.setDate(16, spaceVO.getSpaceOffsaleDate());
 
 			ptmt.executeUpdate();
 			
@@ -130,16 +131,17 @@ public class SpaceDAO implements SpaceDAO_interface{
 			ptmt.setDouble(4, spaceVO.getSpaceLng());
 			ptmt.setDouble(5, spaceVO.getSpaceLat());
 			ptmt.setString(6, spaceVO.getSpaceName());
-			ptmt.setString(7, spaceVO.getSpaceType());
-			ptmt.setString(8, spaceVO.getSpaceEquipment());
-			ptmt.setString(9, spaceVO.getSpaceContain());
-			ptmt.setString(10, spaceVO.getSpaceRule());
-			ptmt.setString(11, spaceVO.getSpaceRefund());
-			ptmt.setString(12, spaceVO.getSpaceStatus());
-			ptmt.setDate(13, spaceVO.getSpaceSignupDate());
-			ptmt.setDate(14, spaceVO.getSpaceOnsaleDate());
-			ptmt.setDate(15, spaceVO.getSpaceOffsaleDate());
-			ptmt.setString(16, spaceVO.getSpaceId());
+			ptmt.setString(7, spaceVO.getSpaceText());
+			ptmt.setString(8, spaceVO.getSpaceType());
+			ptmt.setString(9, spaceVO.getSpaceEquipment());
+			ptmt.setString(10, spaceVO.getSpaceContain());
+			ptmt.setString(11, spaceVO.getSpaceRule());
+			ptmt.setString(12, spaceVO.getSpaceRefund());
+			ptmt.setString(13, spaceVO.getSpaceStatus());
+			ptmt.setDate(14, spaceVO.getSpaceSignupDate());
+			ptmt.setDate(15, spaceVO.getSpaceOnsaleDate());
+			ptmt.setDate(16, spaceVO.getSpaceOffsaleDate());
+			ptmt.setString(17, spaceVO.getSpaceId());
 
 			ptmt.executeUpdate();
 			
@@ -189,6 +191,7 @@ public class SpaceDAO implements SpaceDAO_interface{
 				spaceVO.setSpaceLng(rs.getDouble("SPACE_LNG"));
 				spaceVO.setSpaceLat(rs.getDouble("SPACE_LAT"));
 				spaceVO.setSpaceName(rs.getString("SPACE_NAME"));
+				spaceVO.setSpaceName(rs.getString("SPACE_TEXT"));
 				spaceVO.setSpaceType(rs.getString("SPACE_TYPE"));
 				spaceVO.setSpaceEquipment(rs.getString("SPACE_EQUMENT"));
 				spaceVO.setSpaceContain(rs.getString("SPACE_CONTAIN"));
@@ -254,6 +257,7 @@ public class SpaceDAO implements SpaceDAO_interface{
 				spaceVO.setSpaceLng(rs.getDouble("SPACE_LNG"));
 				spaceVO.setSpaceLat(rs.getDouble("SPACE_LAT"));
 				spaceVO.setSpaceName(rs.getString("SPACE_NAME"));
+				spaceVO.setSpaceName(rs.getString("SPACE_TEXT"));
 				spaceVO.setSpaceType(rs.getString("SPACE_TYPE"));
 				spaceVO.setSpaceEquipment(rs.getString("SPACE_EQUMENT"));
 				spaceVO.setSpaceContain(rs.getString("SPACE_CONTAIN"));
