@@ -39,17 +39,15 @@ public class TestJDBC {
 //			System.out.println(spacePhotoVO.getSpacePhotoId());
 //			System.out.println(spacePhotoVO.getSpaceId());
 //			System.out.println(spacePhotoVO.getSpacePhoto());
-//			System.out.println(spacePhotoVO.getSpacePhotoBase64());
 //		}		
 //		System.out.println("Test All");
 
 		// One
-//		SpacePhotoVO one = dao.selectOne("SPACEPHOTO0000001");
-//		System.out.println(one.getSpacePhotoId());
-//		System.out.println(one.getSpaceId());
-//		System.out.println(one.getSpacePhoto());
-//		System.out.println(one.getSpacePhotoBase64());
-//		System.out.println("Test One");
+		SpacePhotoVO one = dao.selectOne("SPACEPHOTO0000001");
+		System.out.println(one.getSpacePhotoId());
+		System.out.println(one.getSpaceId());
+		System.out.println(one.getSpacePhoto());
+		System.out.println("Test One");
 
 		// insert
 //		SpacePhotoVO add = new SpacePhotoVO();

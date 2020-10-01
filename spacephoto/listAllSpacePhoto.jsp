@@ -16,7 +16,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>所有場地圖片</title>
+<title>所有場地照片</title>
 
 <!-- GOOGLE WEB FONT -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -88,7 +88,7 @@
 		<section class="hero_in hotels">
 			<div class="wrapper">
 				<div class="container">
-					<h1 class="fadeInUp"><span></span>所有場地圖片</h1>
+					<h1 class="fadeInUp"><span></span>所有場地照片</h1>
 				</div>
 			</div>
 		</section>
@@ -96,9 +96,9 @@
 
 <table>
 	<tr>
-		<th>場地圖片ID</th>
+		<th>場地照片ID</th>
 		<th>場地ID</th>
-		<th>場地圖片</th>
+		<th>場地照片</th>
 	</tr>
 	<%@ include file="page1.file" %> 
 	<c:forEach var="spacePhotoVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
@@ -141,17 +141,5 @@
 	<script src="<%=request.getContextPath()%>/plugins/js/map_hotels.js"></script>
 	<script src="<%=request.getContextPath()%>/plugins/js/infobox.js"></script>
 	
-<!-- Masonry Filtering -->
-	<script src="<%=request.getContextPath()%>/plugins/js/isotope.min.js"></script>
-	<script>
-	$(window).on('load', function(){
-	  var $container = $('.isotope-wrapper');
-	  $container.isotope({ itemSelector: '.isotope-item', layoutMode: 'masonry' });
-	});
-	$('.filters_listing').on( 'click', 'input', 'change', function(){
-	  var selector = $(this).attr('data-filter');
-	  $('.isotope-wrapper').isotope({ filter: selector });
-	});
-	</script>
 </body>
 </html>

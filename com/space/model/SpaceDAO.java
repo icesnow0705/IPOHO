@@ -191,7 +191,7 @@ public class SpaceDAO implements SpaceDAO_interface{
 				spaceVO.setSpaceLng(rs.getDouble("SPACE_LNG"));
 				spaceVO.setSpaceLat(rs.getDouble("SPACE_LAT"));
 				spaceVO.setSpaceName(rs.getString("SPACE_NAME"));
-				spaceVO.setSpaceName(rs.getString("SPACE_TEXT"));
+				spaceVO.setSpaceText(rs.getString("SPACE_TEXT"));
 				spaceVO.setSpaceType(rs.getString("SPACE_TYPE"));
 				spaceVO.setSpaceEquipment(rs.getString("SPACE_EQUMENT"));
 				spaceVO.setSpaceContain(rs.getString("SPACE_CONTAIN"));
@@ -257,7 +257,7 @@ public class SpaceDAO implements SpaceDAO_interface{
 				spaceVO.setSpaceLng(rs.getDouble("SPACE_LNG"));
 				spaceVO.setSpaceLat(rs.getDouble("SPACE_LAT"));
 				spaceVO.setSpaceName(rs.getString("SPACE_NAME"));
-				spaceVO.setSpaceName(rs.getString("SPACE_TEXT"));
+				spaceVO.setSpaceText(rs.getString("SPACE_TEXT"));
 				spaceVO.setSpaceType(rs.getString("SPACE_TYPE"));
 				spaceVO.setSpaceEquipment(rs.getString("SPACE_EQUMENT"));
 				spaceVO.setSpaceContain(rs.getString("SPACE_CONTAIN"));

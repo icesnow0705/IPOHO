@@ -133,23 +133,15 @@ public class SpacePhotoServlet extends HttpServlet {
 					errorMessages.add("場地ID請勿空白");
 				}
 
-//				新增圖片，若無圖片則預設塞入圖片
+//				修改照片，若無檔案則預設塞入原本的照片
 				byte[] spacePhoto = null;
 				Part part = req.getPart("spacePhoto");
 				InputStream in = part.getInputStream();
 				String filename = getFileNameFromPart(part);
 				if(filename == null || filename.isEmpty()) {
-					File file = new File(getServletContext().getRealPath("/") + "/spacephoto/images/tomcat.png");
-					FileInputStream fis = new FileInputStream(file);
-					ByteArrayOutputStream baos = new ByteArrayOutputStream();  
-					byte[] buffer = new byte[8192];
-					int i;
-					while ((i = fis.read(buffer)) != -1) {
-						baos.write(buffer, 0, i);
-					}
-					spacePhoto = baos.toByteArray();
-					baos.close();
-					fis.close();
+					SpacePhotoDAO_interface dao = new SpacePhotoDAO();
+					SpacePhotoVO spacePhotoVO = dao.selectOne(req.getParameter("spacePhotoId"));
+					spacePhoto = spacePhotoVO.getSpacePhoto();
 				}else {
 					spacePhoto = new byte[in.available()];
 					in.read(spacePhoto);
@@ -195,17 +187,16 @@ public class SpacePhotoServlet extends HttpServlet {
 
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
-				System.out.println("Test1");
 				String spacePhotoId = new String(req.getParameter("spacePhotoId").trim());
 				if (spacePhotoId == null || spacePhotoId.trim().length() == 0) {
 					errorMessages.add("場地圖片ID請勿空白");
 				}
-				System.out.println("Test2");
+				
 				String spaceId = req.getParameter("spaceId");
 				if (spaceId == null || spaceId.trim().length() == 0) {
 					errorMessages.add("場地ID請勿空白");
 				}
-				System.out.println("Test3");
+
 //				新增一個含有圖片資料的spacePhoto
 				byte[] spacePhoto = null;
 				Part part = req.getPart("spacePhoto");
@@ -228,7 +219,6 @@ public class SpacePhotoServlet extends HttpServlet {
 					in.read(spacePhoto);
 					in.close();
 				}
-				System.out.println("Test4");
 				
 				SpacePhotoVO spacePhotoVO = new SpacePhotoVO();
 				spacePhotoVO.setSpacePhotoId(spacePhotoId);

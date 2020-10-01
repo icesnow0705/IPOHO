@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>新增場地圖片</title>
+<title>新增場地照片</title>
 
 <!-- GOOGLE WEB FONT -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -81,7 +81,7 @@
 		<section class="hero_in hotels">
 			<div class="wrapper">
 				<div class="container">
-					<h1 class="fadeInUp"><span></span>新增場地圖片</h1>
+					<h1 class="fadeInUp"><span></span>新增場地照片</h1>
 				</div>
 			</div>
 		</section>
@@ -90,7 +90,7 @@
 <FORM METHOD="post" ACTION="spacephoto.do" enctype="multipart/form-data"  name="form1">
 <table>
 	<tr>
-		<td>場地圖片ID:</td>
+		<td>場地照片ID:</td>
 		<td><input type="TEXT" name="spacePhotoId" size="45" value="SPId"
 			  /></td>
 	</tr>
@@ -101,7 +101,7 @@
 	</tr>
 
 	<tr>
-		<td>場地圖片:</td>
+		<td>場地照片:</td>
 		<td><input type="FILE" name="spacePhoto" placeholder="上傳場地圖片"
 			 /></td>
 	</tr>	
@@ -126,46 +126,6 @@
 	<script src="<%=request.getContextPath()%>/plugins/js/map_hotels.js"></script>
 	<script src="<%=request.getContextPath()%>/plugins/js/infobox.js"></script>
 	
-<!-- Masonry Filtering -->
-	<script src="<%=request.getContextPath()%>/plugins/js/isotope.min.js"></script>
-	<script>
-	$(window).on('load', function(){
-	  var $container = $('.isotope-wrapper');
-	  $container.isotope({ itemSelector: '.isotope-item', layoutMode: 'masonry' });
-	});
-	$('.filters_listing').on( 'click', 'input', 'change', function(){
-	  var selector = $(this).attr('data-filter');
-	  $('.isotope-wrapper').isotope({ filter: selector });
-	});
-	</script>
 </body>
 
-
-
-<!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
-
-<%-- 
-  java.sql.Date signupDate = null;
-  try {
-	    signupDate = spaceDetailVO.getSpaceDetailFreeDate();
-   } catch (Exception e) {
-	    signupDate = new java.sql.Date(System.currentTimeMillis());
-   }
---%>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
-
-<style>
-  .xdsoft_datetimepicker .xdsoft_datepicker {
-           width:  300px;   /* width:  300px; */
-  }
-  .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-           height: 151px;   /* height:  151px; */
-  }
-</style>
-
-<script>
-        
-</script>
 </html>

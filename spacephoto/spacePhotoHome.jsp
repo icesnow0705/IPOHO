@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>場地圖片首頁</title>
+<title>場地照片首頁</title>
 
 <!-- GOOGLE WEB FONT -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -76,7 +76,7 @@
 		<section class="hero_in hotels">
 			<div class="wrapper">
 				<div class="container">
-					<h1 class="fadeInUp"><span></span>場地圖片首頁</h1>
+					<h1 class="fadeInUp"><span></span>場地照片首頁</h1>
 				</div>
 			</div>
 		</section>
@@ -88,7 +88,7 @@
   
   <li>
     <FORM METHOD="post" ACTION="spacePhoto.do" >
-        <b>輸入場地圖片ID:</b>
+        <b>輸入場地照片ID:</b>
         <input type="text" name="spacePhotoId">
         <input type="hidden" name="action" value="getOne_For_Display">
         <input type="submit" value="送出">
@@ -113,7 +113,7 @@
 </ul>
 
 
-<h3>場地圖片管理</h3>
+<h3>場地照片管理</h3>
 
 <ul>
   <li><a href='addSpacePhoto.jsp'>Add</a> a new SpacePhoto.</li>
@@ -133,17 +133,5 @@
 	<script src="<%=request.getContextPath()%>/plugins/js/map_hotels.js"></script>
 	<script src="<%=request.getContextPath()%>/plugins/js/infobox.js"></script>
 	
-<!-- Masonry Filtering -->
-	<script src="<%=request.getContextPath()%>/plugins/js/isotope.min.js"></script>
-	<script>
-	$(window).on('load', function(){
-	  var $container = $('.isotope-wrapper');
-	  $container.isotope({ itemSelector: '.isotope-item', layoutMode: 'masonry' });
-	});
-	$('.filters_listing').on( 'click', 'input', 'change', function(){
-	  var selector = $(this).attr('data-filter');
-	  $('.isotope-wrapper').isotope({ filter: selector });
-	});
-	</script>
 </body>
 </html>

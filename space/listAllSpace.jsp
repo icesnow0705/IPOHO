@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.space.model.*"%>
+<%@ page import="sun.misc.BASE64Encoder"%>
 
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
@@ -9,6 +10,7 @@
     SpaceService spaceSvc = new SpaceService();
     List<SpaceVO> list = spaceSvc.getAll();
     pageContext.setAttribute("list",list);
+    Base64.Encoder encoder = Base64.getEncoder(); 
 %>
 
 
@@ -83,15 +85,14 @@
 
   <main>
 		
-		<section class="hero_in hotels">
-			<div class="wrapper">
-				<div class="container">
-					<h1 class="fadeInUp"><span></span>場地資料修改</h1>
-				</div>
+	<section class="hero_in hotels">
+		<div class="wrapper">
+			<div class="container">
+				<h1 class="fadeInUp"><span></span>全部場地資料</h1>
 			</div>
-		</section>
-		<!--/hero_in-->
-
+		</div>
+	</section>
+	<!--/hero_in-->
 <table>
 	<tr>
 		<th>場地ID</th>
@@ -165,17 +166,5 @@
 	<script src="<%=request.getContextPath()%>/plugins/js/map_hotels.js"></script>
 	<script src="<%=request.getContextPath()%>/plugins/js/infobox.js"></script>
 	
-	<!-- Masonry Filtering -->
-	<script src="<%=request.getContextPath()%>/plugins/js/isotope.min.js"></script>
-	<script>
-	$(window).on('load', function(){
-	  var $container = $('.isotope-wrapper');
-	  $container.isotope({ itemSelector: '.isotope-item', layoutMode: 'masonry' });
-	});
-	$('.filters_listing').on( 'click', 'input', 'change', function(){
-	  var selector = $(this).attr('data-filter');
-	  $('.isotope-wrapper').isotope({ filter: selector });
-	});
-	</script>
 </body>
 </html>
