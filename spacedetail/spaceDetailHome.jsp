@@ -30,6 +30,11 @@
 				<img src="<%=request.getContextPath()%>/plugins/img/logo_sticky.svg" width="150" height="36" alt="" class="logo_sticky">
 			</a>
 		</div>		
+		<ul id="top_menu">
+			<li><a href="cart-1.html" class="cart-menu-btn" title="Cart"><strong>4</strong></a></li>
+			<li><a href="#sign-in-dialog" id="sign-in" class="login" title="Sign In">Sign In</a></li>
+			<li><a href="wishlist.html" class="wishlist_bt_top" title="Your wishlist">Your wishlist</a></li>
+		</ul>
 		<!-- /top_menu -->
 		<a href="#menu" class="btn_mobile">
 			<div class="hamburger hamburger--spin" id="hamburger">
@@ -40,33 +45,60 @@
 		</a>
 		<nav id="menu" class="main-menu">
 			<ul>
-				<li><span><a href="<%=request.getContextPath()%>/space/spaceHome.jsp">場地</a></span>
+				<li><span><a href="<%=request.getContextPath()%>/frontend/space/spaceHome.jsp">場地</a></span>
 					<ul>
-						<li><a href="<%=request.getContextPath()%>/space/addSpace.jsp">新增場地</a></li>
-						<li><a href="<%=request.getContextPath()%>/space/listAllSpace.jsp">所有場地</a></li>
+						<li>
+							<span><a href="<%=request.getContextPath()%>/frontend/space/spaceHome.jsp">我的場地</a></span>
+							<ul>
+								<li><a href="<%=request.getContextPath()%>/frontend/space/addSpace.jsp">新增場地</a></li>
+								<li><a href="<%=request.getContextPath()%>/frontend/space/listAllSpace.jsp">所有場地</a></li>
+							</ul>
+						</li>
+						<li>
+							<span><a href="<%=request.getContextPath()%>/frontend/spacedetail/spaceDetailHome.jsp">我的場地明細</a></span>
+							<ul>
+								<li><a href="<%=request.getContextPath()%>/frontend/spacedetail/addSpaceDetail.jsp">新增場地明細</a></li>
+								<li><a href="<%=request.getContextPath()%>/frontend/spacedetail/listAllSpaceDetail.jsp">所有場地明細</a></li>
+							</ul>
+						</li>
+						<li>
+							<span><a href="<%=request.getContextPath()%>/frontend/spacephoto/spacePhotoHome.jsp">場地照片</a></span>
+							<ul>
+								<li><a href="<%=request.getContextPath()%>/frontend/spacephoto/addSpacePhoto.jsp">新增場地照片</a></li>
+								<li><a href="<%=request.getContextPath()%>/frontend/spacephoto/listAllSpacePhoto.jsp">所有場地照片</a></li>
+							</ul>
+						</li>
+						<li>
+							<span><a href="<%=request.getContextPath()%>/frontend/spacecomment/spaceCommentHome.jsp">場地評價</a></span>
+							<ul>
+								<li><a href="<%=request.getContextPath()%>/frontend/spacecomment/addSpaceComment.jsp">新增場地評價</a></li>
+								<li><a href="<%=request.getContextPath()%>/frontend/spacecomment/listAllSpaceComment.jsp">所有場地評價</a></li>
+							</ul>
+						</li>
 					</ul>
 				</li>
-				<li><span><a href="<%=request.getContextPath()%>/spacedetail/spaceDetailHome.jsp">場地明細</a></span>
-					<ul>
-						<li><a href="<%=request.getContextPath()%>/spacedetail/addSpaceDetail.jsp">新增場地明細</a></li>
-						<li><a href="<%=request.getContextPath()%>/spacedetail/listAllSpaceDetail.jsp">所有場地明細</a></li>
-					</ul>
+				<li><span><a></a></span>
 				</li>
-				<li><span><a href="<%=request.getContextPath()%>/spacephoto/spacePhotoHome.jsp">場地照片</a></span>
-					<ul>
-						<li><a href="<%=request.getContextPath()%>/spacephoto/addSpacePhoto.jsp">新增場地照片</a></li>
-						<li><a href="<%=request.getContextPath()%>/spacephoto/listAllSpacePhoto.jsp">所有場地照片</a></li>
-					</ul>
+				<li><span><a></a></span>
 				</li>
-				<li><span><a href="<%=request.getContextPath()%>/spacecomment/spaceCommentHome.jsp">場地評價</a></span>
-					<ul>
-						<li><a href="<%=request.getContextPath()%>/spacecomment/addSpaceComment.jsp">新增場地評價</a></li>
-						<li><a href="<%=request.getContextPath()%>/spacecomment/listAllSpaceComment.jsp">所有場地評價</a></li>
-					</ul>
-				</li>				
+				<li><span><a></a></span>
+				</li>
+				<li><span><a></a></span>
+				</li>
+				<li><span><a></a></span>
+				</li>
+				<li><span><a></a></span>
+				</li>
+				<li><span><a></a></span>
+				</li>
+				<li><span><a></a></span>
+				</li>
+				<li><span><a></a></span>
+				</li>
+				<li><span><a></a></span>
+				</li>
 			</ul>
 		</nav>
-
 	</header>
   <!-- /header -->
 
@@ -82,11 +114,11 @@
 		<!--/hero_in-->
 
 <ul>
-  <li><a href='listAllSpaceDetail.jsp'>List</a> all SpaceDetails.  <br><br></li>
+  <li><a href='<%=request.getContextPath()%>/frontend/spacedetail/listAllSpaceDetail.jsp'>List</a> all SpaceDetails.  <br><br></li>
   
   
   <li>
-    <FORM METHOD="post" ACTION="spaceDetail.do" >
+    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/spacedetail/spacedetail.do" >
         <b>輸入場地明細ID:</b>
         <input type="text" name="spaceDetailId">
         <input type="hidden" name="action" value="getOne_For_Display">
@@ -97,7 +129,7 @@
 <jsp:useBean id="spaceDetailSvc" scope="page" class="com.spacedetail.model.SpaceDetailService" /> 
    
   <li>
-     <FORM METHOD="post" ACTION="spacedetail.do" >
+     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/spacedetail/spacedetail.do" >
        <b>選擇場地ID:</b>
        <select size="1" name="spaceDetailId">
          <c:forEach var="spaceDetailVO" items="${spaceDetailSvc.all}" > 
@@ -115,7 +147,7 @@
 <h3>場地明細管理</h3>
 
 <ul>
-  <li><a href='addSpaceDetail.jsp'>Add</a> a new SpaceDetail.</li>
+  <li><a href='<%=request.getContextPath()%>/frontend/spacedetail/addSpaceDetail.jsp'>Add</a> a new SpaceDetail.</li>
 </ul>
 </main>
 <!--/main-->
@@ -132,17 +164,5 @@
 	<script src="<%=request.getContextPath()%>/plugins/js/map_hotels.js"></script>
 	<script src="<%=request.getContextPath()%>/plugins/js/infobox.js"></script>
 	
-<!-- Masonry Filtering -->
-	<script src="<%=request.getContextPath()%>/plugins/js/isotope.min.js"></script>
-	<script>
-	$(window).on('load', function(){
-	  var $container = $('.isotope-wrapper');
-	  $container.isotope({ itemSelector: '.isotope-item', layoutMode: 'masonry' });
-	});
-	$('.filters_listing').on( 'click', 'input', 'change', function(){
-	  var selector = $(this).attr('data-filter');
-	  $('.isotope-wrapper').isotope({ filter: selector });
-	});
-	</script>
 </body>
 </html>

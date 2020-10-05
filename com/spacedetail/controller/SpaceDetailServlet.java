@@ -49,13 +49,13 @@ public class SpaceDetailServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/spacedetail/spaceDetailHome");
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacedetail/spaceDetailHome");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
 
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/spacedetail/spaceDetailHome");
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacedetail/spaceDetailHome");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -68,21 +68,21 @@ public class SpaceDetailServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/spacedetail/spaceDetailHome");
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacedetail/spaceDetailHome");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("spaceDetailVO", spaceDetailVO); // 資料庫取出的spaceDetailVO物件,存入req
-				String url = "/spacedetail/listOneSpaceDetail.jsp";
+				String url = "/frontend/spacedetail/listOneSpaceDetail.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneSpaceDetail.jsp
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/spacedetail/spaceDetailHome");
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacedetail/spaceDetailHome");
 				failureView.forward(req, res);
 			}
 		}
@@ -104,14 +104,14 @@ public class SpaceDetailServlet extends HttpServlet {
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 				req.setAttribute("spaceDetailVO", spaceDetailVO); // 資料庫取出的spaceDetailVO物件,存入req
-				String url = "/spacedetail/updateSpaceDetail.jsp";
+				String url = "/frontend/spacedetail/updateSpaceDetail.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_spacedetail_input.jsp
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/spacedetail/listAllSpaceDetail.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacedetail/listAllSpaceDetail.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -180,7 +180,7 @@ public class SpaceDetailServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMessages.isEmpty()) {
 					req.setAttribute("spaceDetailVO", spaceDetailVO); // 含有輸入格式錯誤的spaceDetailVO物件,也存入req
-					RequestDispatcher failureView = req.getRequestDispatcher("/spacedetail/updateSpaceDetail.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacedetail/updateSpaceDetail.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
 				}
@@ -191,14 +191,14 @@ public class SpaceDetailServlet extends HttpServlet {
 				System.out.println(spaceDetailVO);
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("spaceDetailVO", spaceDetailVO);
-				String url = "/spacedetail/listOneSpaceDetail.jsp";
+				String url = "/frontend/spacedetail/listOneSpaceDetail.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMessages.add("修改資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/spacedetail/updateSpaceDetail.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacedetail/updateSpaceDetail.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -267,7 +267,7 @@ public class SpaceDetailServlet extends HttpServlet {
 //				 Send the use back to the form, if there were errors
 				if (!errorMessages.isEmpty()) {
 					req.setAttribute("spaceDetailVO", spaceDetailVO); 
-					RequestDispatcher failureView = req.getRequestDispatcher("/spacedetail/addSpaceDetail.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacedetail/addSpaceDetail.jsp");
 					failureView.forward(req, res);
 				}
 				/*************************** 2.新增資料 ***************************************/
@@ -276,7 +276,7 @@ public class SpaceDetailServlet extends HttpServlet {
 				System.out.println(spaceDetailVO);
 				
 				/*************************** 3.資料轉交(Send the Success view) ***********/
-				String url = "/spacedetail/listAllSpaceDetail.jsp";
+				String url = "/frontend/spacedetail/listAllSpaceDetail.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
@@ -284,7 +284,7 @@ public class SpaceDetailServlet extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 				errorMessages.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/spacedetail/addSpaceDetail.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacedetail/addSpaceDetail.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -305,14 +305,14 @@ public class SpaceDetailServlet extends HttpServlet {
 				spaceDetailSvc.deleteSpaceDetail(spaceDetailId);
 
 				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-				String url = "/spacedetail/listAllSpaceDetail.jsp";
+				String url = "/frontend/spacedetail/listAllSpaceDetail.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/spacedetail/listAllSpaceDetail.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacedetail/listAllSpaceDetail.jsp");
 				failureView.forward(req, res);
 			}
 		}

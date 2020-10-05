@@ -9,14 +9,14 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import javax.sql.DataSource;
-@WebServlet("/space/showpicture")
-public class ShowPicture extends HttpServlet {
+@WebServlet("/space/showonepicture")
+public class ShowOnePicture extends HttpServlet {
 	
 	private static final String driver = "oracle.jdbc.driver.OracleDriver";
 	private static final String url = "jdbc:oracle:thin:@localhost:1521:XE";
 	private static final String userid = "TEA101G2SP";
 	private static final String passwd = "123456";
-	private static final String GET_PHOTO = "SELECT SPACE_PHOTO FROM SPACE_PHOTO WHERE SPACE_ID = ?";
+	private static final String GET_ONEPHOTO = "SELECT SPACE_PHOTO FROM SPACE_PHOTO WHERE SPACE_ID = ? AND ROWNUM = 1";
 
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
@@ -36,7 +36,7 @@ public class ShowPicture extends HttpServlet {
 		ServletOutputStream out = res.getOutputStream();
 
 		try {
-			PreparedStatement pstmt = con.prepareStatement(GET_PHOTO);
+			PreparedStatement pstmt = con.prepareStatement(GET_ONEPHOTO);
 			String spaceId = req.getParameter("spaceId").trim();
 			pstmt.setString(1, spaceId);
 			ResultSet rs = pstmt.executeQuery();
@@ -64,7 +64,7 @@ public class ShowPicture extends HttpServlet {
 		}
 	}
 
-	public void init() throws ServletException {
+//	public void init() throws ServletException {
 //		try {
 			
 			
@@ -76,14 +76,15 @@ public class ShowPicture extends HttpServlet {
 //		} catch (SQLException e) {
 //			e.printStackTrace();
 //		}
-	}
+//	}
 
-	public void destroy() {
+//	public void destroy() {
 //		try {
 //			if (con != null) con.close();
 //		} catch (SQLException e) {
 //			System.out.println(e);
 //		}
-	}
+//	}
+
 }
 

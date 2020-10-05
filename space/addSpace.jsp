@@ -11,7 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 <title>場地資料新增</title>
 
-  <!-- GOOGLE WEB FONT -->
+<!-- GOOGLE WEB FONT -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <!-- BASE CSS -->
@@ -30,11 +30,16 @@
 	<header class="header menu_fixed">
 		<div id="preloader"><div data-loader="circle-side"></div></div><!-- /Page Preload -->
 		<div id="logo">
-			<a href="<%=request.getContextPath()%>/space/spaceHome.jsp">
+			<a href="<%=request.getContextPath()%>/frontend/space/spaceHome.jsp">
 				<img src="<%=request.getContextPath()%>/plugins/img/logo.svg" width="150" height="36" alt="" class="logo_normal">
 				<img src="<%=request.getContextPath()%>/plugins/img/logo_sticky.svg" width="150" height="36" alt="" class="logo_sticky">
 			</a>
 		</div>		
+		<ul id="top_menu">
+			<li><a href="cart-1.html" class="cart-menu-btn" title="Cart"><strong>4</strong></a></li>
+			<li><a href="#sign-in-dialog" id="sign-in" class="login" title="Sign In">Sign In</a></li>
+			<li><a href="wishlist.html" class="wishlist_bt_top" title="Your wishlist">Your wishlist</a></li>
+		</ul>
 		<!-- /top_menu -->
 		<a href="#menu" class="btn_mobile">
 			<div class="hamburger hamburger--spin" id="hamburger">
@@ -45,30 +50,58 @@
 		</a>
 		<nav id="menu" class="main-menu">
 			<ul>
-				<li><span><a href="<%=request.getContextPath()%>/space/spaceHome.jsp">場地</a></span>
+				<li><span><a href="<%=request.getContextPath()%>/frontend/space/spaceHome.jsp">場地</a></span>
 					<ul>
-						<li><a href="<%=request.getContextPath()%>/space/addSpace.jsp">新增場地</a></li>
-						<li><a href="<%=request.getContextPath()%>/space/listAllSpace.jsp">所有場地</a></li>
+						<li>
+							<span><a href="<%=request.getContextPath()%>/frontend/space/spaceHome.jsp">我的場地</a></span>
+							<ul>
+								<li><a href="<%=request.getContextPath()%>/frontend/space/addSpace.jsp">新增場地</a></li>
+								<li><a href="<%=request.getContextPath()%>/frontend/space/listAllSpace.jsp">所有場地</a></li>
+							</ul>
+						</li>
+						<li>
+							<span><a href="<%=request.getContextPath()%>/frontend/spacedetail/spaceDetailHome.jsp">我的場地明細</a></span>
+							<ul>
+								<li><a href="<%=request.getContextPath()%>/frontend/spacedetail/addSpaceDetail.jsp">新增場地明細</a></li>
+								<li><a href="<%=request.getContextPath()%>/frontend/spacedetail/listAllSpaceDetail.jsp">所有場地明細</a></li>
+							</ul>
+						</li>
+						<li>
+							<span><a href="<%=request.getContextPath()%>/frontend/spacephoto/spacePhotoHome.jsp">場地照片</a></span>
+							<ul>
+								<li><a href="<%=request.getContextPath()%>/frontend/spacephoto/addSpacePhoto.jsp">新增場地照片</a></li>
+								<li><a href="<%=request.getContextPath()%>/frontend/spacephoto/listAllSpacePhoto.jsp">所有場地照片</a></li>
+							</ul>
+						</li>
+						<li>
+							<span><a href="<%=request.getContextPath()%>/frontend/spacecomment/spaceCommentHome.jsp">場地評價</a></span>
+							<ul>
+								<li><a href="<%=request.getContextPath()%>/frontend/spacecomment/addSpaceComment.jsp">新增場地評價</a></li>
+								<li><a href="<%=request.getContextPath()%>/frontend/spacecomment/listAllSpaceComment.jsp">所有場地評價</a></li>
+							</ul>
+						</li>
 					</ul>
 				</li>
-				<li><span><a href="<%=request.getContextPath()%>/spacedetail/spaceDetailHome.jsp">場地明細</a></span>
-					<ul>
-						<li><a href="<%=request.getContextPath()%>/spacedetail/addSpaceDetail.jsp">新增場地明細</a></li>
-						<li><a href="<%=request.getContextPath()%>/spacedetail/listAllSpaceDetail.jsp">所有場地明細</a></li>
-					</ul>
+				<li><span><a></a></span>
 				</li>
-				<li><span><a href="<%=request.getContextPath()%>/spacephoto/spacePhotoHome.jsp">場地照片</a></span>
-					<ul>
-						<li><a href="<%=request.getContextPath()%>/spacephoto/addSpacePhoto.jsp">新增場地照片</a></li>
-						<li><a href="<%=request.getContextPath()%>/spacephoto/listAllSpacePhoto.jsp">所有場地照片</a></li>
-					</ul>
+				<li><span><a></a></span>
 				</li>
-				<li><span><a href="<%=request.getContextPath()%>/spacecomment/spaceCommentHome.jsp">場地評價</a></span>
-					<ul>
-						<li><a href="<%=request.getContextPath()%>/spacecomment/addSpaceComment.jsp">新增場地評價</a></li>
-						<li><a href="<%=request.getContextPath()%>/spacecomment/listAllSpaceComment.jsp">所有場地評價</a></li>
-					</ul>
-				</li>				
+				<li><span><a></a></span>
+				</li>
+				<li><span><a></a></span>
+				</li>
+				<li><span><a></a></span>
+				</li>
+				<li><span><a></a></span>
+				</li>
+				<li><span><a></a></span>
+				</li>
+				<li><span><a></a></span>
+				</li>
+				<li><span><a></a></span>
+				</li>
+				<li><span><a></a></span>
+				</li>
 			</ul>
 		</nav>
 
@@ -86,14 +119,13 @@
 		</section>
 		<!--/hero_in-->
 		
-<FORM METHOD="post" ACTION="space.do" name="form1">
-  <!-- /Navigation-->
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/space/space.do" name="form1">
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="<%=request.getContextPath()%>/space/spaceHome.jsp">spaceHome</a>
+          <a href="<%=request.getContextPath()%>/frontend/space/spaceHome.jsp">spaceHome</a>
         </li>
         <li class="breadcrumb-item active">新增場地</li>
       </ol>
@@ -102,19 +134,13 @@
 				<h2><i class="fa fa-file"></i>新增場地</h2>
 			</div>
 			<div class="row">
-				<div class="col-md-4">
-					<div class="form-group">
-						<label>場地ID</label>
-						<input type="text" name="spaceId" class="form-control" value="New_SpaceId">
-					</div>
-				</div>
-				<div class="col-md-4">
+				<div class="col-md-6">
 					<div class="form-group">
 						<label>會員ID</label>
 						<input type="text" name="memId" class="form-control" value="MEM00001">
 					</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-6">
 					<div class="form-group">
 						<label>員工ID</label>
 						<input type="text" name="empId" class="form-control" value="EMP00001">
@@ -184,8 +210,7 @@
 				<div class="col-md-12">
 					<div class="form-group">
 						<label>場地介紹</label>
-<%-- 					<div class="editor"></div>     --%>
-						<input type="text" name="spaceText" class="form-control" value="新增的場地介紹">
+						<textarea name="spaceText" class="form-control" rows="5">新增場地介紹</textarea>
 					</div>
 				</div>
 			</div>			
@@ -194,8 +219,7 @@
 				<div class="col-md-12">
 					<div class="form-group">
 						<label>場地規則</label>
-<%-- 					<div class="editor"></div>     --%>
-						<input type="text" name="spaceRule" class="form-control" value="NewSpaceRule">
+						<textarea name="spaceRule" class="form-control" rows="4">新增場地規則</textarea>
 					</div>
 				</div>
 			</div>
@@ -209,19 +233,19 @@
 				</div>
 			</div>			
 			<!-- /row-->
-			<div class="row">
+		<div class="row">
 				<div class="col-md-3">
 					<div class="form-group">
 						<label>場地狀態</label>
 						<div class="styled2-select">
 							<select name="spaceStatus">
-							 <option>o</option>
-							 <option>c</option>							 
+							 <option>T</option>
+							 <option>F</option>							 
 							</select>
 					  </div>
 					</div>
 				</div>
-        	<div class="col-md-3">
+           	<div class="col-md-3">
 					<div class="form-group">
 						<label>場地註冊日期</label>
 						<input type="text" name="spaceSignupDate" class="form-control" value="2020-09-23">
@@ -238,7 +262,7 @@
 						<label>場地下架日期</label>
 						<input type="text" name="spaceOffsaleDate" class="form-control" value="2020-09-24">
 					</div>
-			</div>
+			</div> 
 		</div>	
 		<!-- /row-->
 		</div>    
@@ -247,6 +271,8 @@
 			<input type="hidden" name="action" value="insert">
             <input type="submit" value="送出新增" class="btn_1 medium">
 		</p>
+		</div>
+	  </div>
 	</FORM>
 </main>
 <!--/main-->
@@ -263,18 +289,6 @@
 	<script src="<%=request.getContextPath()%>/plugins/js/map_hotels.js"></script>
 	<script src="<%=request.getContextPath()%>/plugins/js/infobox.js"></script>
 	
-<!-- Masonry Filtering -->
-	<script src="<%=request.getContextPath()%>/plugins/js/isotope.min.js"></script>
-	<script>
-	$(window).on('load', function(){
-	  var $container = $('.isotope-wrapper');
-	  $container.isotope({ itemSelector: '.isotope-item', layoutMode: 'masonry' });
-	});
-	$('.filters_listing').on( 'click', 'input', 'change', function(){
-	  var selector = $(this).attr('data-filter');
-	  $('.isotope-wrapper').isotope({ filter: selector });
-	});
-	</script>
 </body>
 
 </html>

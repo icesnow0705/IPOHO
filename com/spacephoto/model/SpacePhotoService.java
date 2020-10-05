@@ -1,6 +1,12 @@
 package com.spacephoto.model;
 
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 
 public class SpacePhotoService {
 	
@@ -31,30 +37,30 @@ public class SpacePhotoService {
 	public List<SpacePhotoVO> getAll(){
 		return dao.getAll();
 	}
-	
-	public SpacePhotoVO updateSpacePhoto(String spacePhotoId, String spaceId, byte[] spacePhoto) {
-		
-		SpacePhotoVO spacePhotoVO = new SpacePhotoVO();
-		
-		spacePhotoVO.setSpacePhotoId(spacePhotoId);
-		spacePhotoVO.setSpaceId(spaceId);
-		spacePhotoVO.setSpacePhoto(spacePhoto);
-//		spacePhotoVO.setSpacePhotoBase64(spacePhotoBase64);
-		dao.update(spacePhotoVO);
-		
-		return spacePhotoVO;
+	//取相同spaceId
+	public List<SpacePhotoVO> getAllPhoto(String spaceId){
+		return dao.getAllPhoto(spaceId);
+	}
+	//取SpaceId預設圖
+	public List<SpacePhotoVO> getDefaultPhoto(String spaceId){
+		return dao.getDefaultPhoto(spaceId);
 	}
 	
-	public SpacePhotoVO addSpacePhoto(String spacePhotoId, String spaceId, byte[] spacePhoto) {
+	public String getDefaultFirstPhoto(String spaceId){
+		List<SpacePhotoVO> all = dao.getAll();
+		List<SpacePhotoVO> allBySpace = new ArrayList<SpacePhotoVO>();
+		SpacePhotoVO first = new SpacePhotoVO(); 
 		
-		SpacePhotoVO spacePhotoVO = new SpacePhotoVO();
+		allBySpace = all.stream()
+			.filter(sp -> sp.getSpaceId().equals(spaceId))
+			.collect(Collectors.toList());
 		
-		spacePhotoVO.setSpacePhotoId(spacePhotoId);
-		spacePhotoVO.setSpaceId(spaceId);
-		spacePhotoVO.setSpacePhoto(spacePhoto);
-//		spacePhotoVO.setSpacePhotoBase64(spacePhotoBase64);
-		dao.insert(spacePhotoVO);
+		Optional<SpacePhotoVO> sp = allBySpace.stream().findFirst();
+		first = sp.get();
 		
-		return spacePhotoVO;
+		Base64.Encoder encode = Base64.getEncoder();
+		String spacePhoto = encode.encodeToString(first.getSpacePhoto());
+		
+		return spacePhoto;
 	}
 }

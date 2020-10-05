@@ -48,13 +48,13 @@ public class SpaceCommentServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/spacecomment/spaceCommentHome.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacecomment/spaceCommentHome.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
 
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/spacecomment/spaceCommentHome.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacecomment/spaceCommentHome.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -67,21 +67,21 @@ public class SpaceCommentServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/spacecomment/spaceCommentHome.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacecomment/spaceCommentHome.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("spaceCommentVO", spaceCommentVO); // 資料庫取出的spaceCommentVO物件,存入req
-				String url = "/spacecomment/listOneSpaceComment.jsp";
+				String url = "/frontend/spacecomment/listOneSpaceComment.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneSpaceComment.jsp
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/spacecomment/spaceCommentHome.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacecomment/spaceCommentHome.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -103,14 +103,14 @@ public class SpaceCommentServlet extends HttpServlet {
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 				req.setAttribute("spaceCommentVO", spaceCommentVO); // 資料庫取出的spaceCommentVO物件,存入req
-				String url = "/spacecomment/updateSpaceComment.jsp";
+				String url = "/frontend/spacecomment/updateSpaceComment.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 updateSpaceComment.jsp
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/spacecomment/listAllSpaceComment.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacecomment/listAllSpaceComment.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -173,7 +173,7 @@ public class SpaceCommentServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMessages.isEmpty()) {
 					req.setAttribute("spaceCommentVO", spaceCommentVO); // 含有輸入格式錯誤的spaceCommentVO物件,也存入req
-					RequestDispatcher failureView = req.getRequestDispatcher("/spacecomment/updateSpaceComment.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacecomment/updateSpaceComment.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
 				}
@@ -184,14 +184,14 @@ public class SpaceCommentServlet extends HttpServlet {
 				System.out.println(spaceCommentVO);
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("spaceCommentVO", spaceCommentVO);
-				String url = "/spacecomment/listOneSpaceComment.jsp";
+				String url = "/frontend/spacecomment/listOneSpaceComment.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMessages.add("修改資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/spacecomment/updateSpaceComment.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacecomment/updateSpaceComment.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -254,7 +254,7 @@ public class SpaceCommentServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMessages.isEmpty()) {
 					req.setAttribute("spaceCommentVO", spaceCommentVO); // 含有輸入格式錯誤的spaceCommentVO物件,也存入req
-					RequestDispatcher failureView = req.getRequestDispatcher("/spacecomment/updateSpaceComment.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacecomment/updateSpaceComment.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
 				}
@@ -264,7 +264,7 @@ public class SpaceCommentServlet extends HttpServlet {
 				System.out.println(spaceCommentVO);
 				
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/spacecomment/listAllSpaceComment.jsp";
+				String url = "/frontend/spacecomment/listAllSpaceComment.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
@@ -272,7 +272,7 @@ public class SpaceCommentServlet extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 				errorMessages.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/spacecomment/addSpaceComment.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacecomment/addSpaceComment.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -293,14 +293,14 @@ public class SpaceCommentServlet extends HttpServlet {
 				spaceCommentSvc.deleteSpaceComment(spaceCommentId);
 
 				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-				String url = "/spacecomment/listAllSpaceComment.jsp";
+				String url = "/frontend/spacecomment/listAllSpaceComment.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/spacecomment/listAllspaceComment.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacecomment/listAllspaceComment.jsp");
 				failureView.forward(req, res);
 			}
 		}

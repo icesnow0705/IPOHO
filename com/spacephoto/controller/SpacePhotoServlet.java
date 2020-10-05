@@ -47,13 +47,13 @@ public class SpacePhotoServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/spacephoto/spacePhotoHome.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacephoto/spacePhotoHome.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
 
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/spacephoto/spacePhotoHome.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacephoto/spacePhotoHome.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -66,21 +66,21 @@ public class SpacePhotoServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/spacephoto/spacePhotoHome.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacephoto/spacePhotoHome.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("spacePhotoVO", spacePhotoVO); 
-				String url = "/spacephoto/listOneSpacePhoto.jsp";
+				String url = "/frontend/spacephoto/listOneSpacePhoto.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/spacephoto/spacePhotoHome.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacephoto/spacePhotoHome.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -102,14 +102,14 @@ public class SpacePhotoServlet extends HttpServlet {
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 				req.setAttribute("spacePhotoVO", spacePhotoVO);
-				String url = "/spacephoto/updateSpacePhoto.jsp";
+				String url = "/frontend/spacephoto/updateSpacePhoto.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/spacephoto/listAllSpacePhoto.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacephoto/listAllSpacePhoto.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -156,25 +156,25 @@ public class SpacePhotoServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMessages.isEmpty()) {
 					req.setAttribute("spacePhotoVO", spacePhotoVO);
-					RequestDispatcher failureView = req.getRequestDispatcher("/spacephoto/updateSpacePhoto.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacephoto/updateSpacePhoto.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
 				}
 
 				/*************************** 2.開始修改資料 *****************************************/
 				SpacePhotoService spacePhotoSvc = new SpacePhotoService();
-				spacePhotoVO = spacePhotoSvc.updateSpacePhoto(spacePhotoId, spaceId, spacePhoto);
+				spacePhotoVO = spacePhotoSvc.updateSpacePhoto(spacePhotoVO);
 				System.out.println(spacePhotoVO);
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("spacePhotoVO", spacePhotoVO); 
-				String url = "/spacephoto/listOneSpacePhoto.jsp";
+				String url = "/frontend/spacephoto/listOneSpacePhoto.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneSpacePhoto.jsp
 				successView.forward(req, res);
 				
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMessages.add("修改資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/spacephoto/updateSpacePhoto.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacephoto/updateSpacePhoto.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -203,7 +203,7 @@ public class SpacePhotoServlet extends HttpServlet {
 				InputStream in = part.getInputStream();
 				String filename = getFileNameFromPart(part);
 				if(filename == null || filename.isEmpty()) {
-					File file = new File(getServletContext().getRealPath("/") + "/spacephoto/images/tomcat.png");
+					File file = new File(getServletContext().getRealPath("/") + "/frontend/spacephoto/images/tomcat.png");
 					FileInputStream fis = new FileInputStream(file);
 					ByteArrayOutputStream baos = new ByteArrayOutputStream();  
 					byte[] buffer = new byte[8192];
@@ -235,11 +235,11 @@ public class SpacePhotoServlet extends HttpServlet {
 				}
 				/*************************** 2.開始新增資料 ***************************************/
 				SpacePhotoService spacePhotoSvc = new SpacePhotoService();
-				spacePhotoVO = spacePhotoSvc.addSpacePhoto(spacePhotoId, spaceId, spacePhoto);
+				spacePhotoVO = spacePhotoSvc.addSpacePhoto(spacePhotoVO);
 				System.out.println(spacePhotoVO);
 				
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/spacephoto/listAllSpacePhoto.jsp";
+				String url = "/frontend/spacephoto/listAllSpacePhoto.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
@@ -247,7 +247,7 @@ public class SpacePhotoServlet extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 				errorMessages.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/spacephoto/addSpacePhoto.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacephoto/addSpacePhoto.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -268,14 +268,14 @@ public class SpacePhotoServlet extends HttpServlet {
 				spacePhotoSvc.deleteSpacePhoto(spacePhotoId);
 
 				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-				String url = "/spacephoto/listAllSpacePhoto.jsp";
+				String url = "/frontend/spacephoto/listAllSpacePhoto.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/spacephoto/listAllSpacePhoto.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacephoto/listAllSpacePhoto.jsp");
 				failureView.forward(req, res);
 			}
 		}

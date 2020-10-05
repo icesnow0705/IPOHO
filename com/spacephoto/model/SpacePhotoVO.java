@@ -4,7 +4,6 @@ public class SpacePhotoVO {
 	private String spacePhotoId;
 	private String spaceId;
 	private byte[] spacePhoto;
-//	private String spacePhotoBase64;
 	
 	
 	public String getSpacePhotoId() {
@@ -25,10 +24,4 @@ public class SpacePhotoVO {
 	public void setSpacePhoto(byte[] spacePhoto) {
 		this.spacePhoto = spacePhoto;
 	}
-//	public String getSpacePhotoBase64() {
-//		return spacePhotoBase64;
-//	}
-//	public void setSpacePhotoBase64(String spacePhotoBase64) {
-//		this.spacePhotoBase64 = spacePhotoBase64;
-//	}
 }
