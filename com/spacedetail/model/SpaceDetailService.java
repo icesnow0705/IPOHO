@@ -1,4 +1,4 @@
-package com.spacedetail.model;
+package com.spaceDetail.model;
 
 import java.util.List;
 
@@ -27,9 +27,16 @@ public class SpaceDetailService {
 	public SpaceDetailVO selectOneSpaceDetail(String spaceDetailId) {
 		return dao.selectOne(spaceDetailId);
 	}
+	//誠實業者必備顯示最低價格
+	public SpaceDetailVO selectOneLowest(String spaceId) {
+		return dao.selectOneLowest(spaceId);
+	}
 	
 	public List<SpaceDetailVO> getAll(){
 		return dao.getAll();
 	}
-	
+	//根據場地ID滾出list
+	public List<SpaceDetailVO> getSpaceIdList(String spaceId){
+		return dao.getSpaceIdList(spaceId);
+	}
 }

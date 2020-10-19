@@ -2,11 +2,15 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.spacephoto.model.*"%>
+<%@ page import="com.spacePhoto.model.*"%>
 <%@ page import="com.space.model.*"%>
 
 <%
   SpaceVO spaceVO = (SpaceVO) request.getAttribute("spaceVO"); // SpaceServlet.java (Concroller) 存入req的spaceVO物件 (包括幫忙取出的spaceVO, 也包括輸入資料錯誤時的spaceVO物件)
+  String spaceEqAll = spaceVO.getSpaceEquipment();
+  String[] spaceEqSplit = spaceEqAll.split(":");
+  out.print(spaceEqSplit[spaceEqSplit.length-1]);
+  LinkedList<String> errorMessages = (LinkedList<String>) request.getAttribute("errorMessages");
 %>
 
 <html>
@@ -31,182 +35,129 @@
 <body>
 
   <div id="page">
-		
-	<header class="header menu_fixed">
-		<div id="preloader"><div data-loader="circle-side"></div></div><!-- /Page Preload -->
-		<div id="logo">
-			<a href="<%=request.getContextPath()%>/frontend/space/spaceHome.jsp">
-				<img src="<%=request.getContextPath()%>/plugins/img/logo.svg" width="150" height="36" alt="" class="logo_normal">
-				<img src="<%=request.getContextPath()%>/plugins/img/logo_sticky.svg" width="150" height="36" alt="" class="logo_sticky">
-			</a>
-		</div>		
-		<ul id="top_menu">
-			<li><a href="cart-1.html" class="cart-menu-btn" title="Cart"><strong>4</strong></a></li>
-			<li><a href="#sign-in-dialog" id="sign-in" class="login" title="Sign In">Sign In</a></li>
-			<li><a href="wishlist.html" class="wishlist_bt_top" title="Your wishlist">Your wishlist</a></li>
-		</ul>
-		<!-- /top_menu -->
-		<a href="#menu" class="btn_mobile">
-			<div class="hamburger hamburger--spin" id="hamburger">
-				<div class="hamburger-box">
-					<div class="hamburger-inner"></div>
-				</div>
-			</div>
-		</a>
-		<nav id="menu" class="main-menu">
-			<ul>
-				<li><span><a href="<%=request.getContextPath()%>/frontend/space/spaceHome.jsp">場地</a></span>
-					<ul>
-						<li>
-							<span><a href="<%=request.getContextPath()%>/frontend/space/spaceHome.jsp">我的場地</a></span>
-							<ul>
-								<li><a href="<%=request.getContextPath()%>/frontend/space/addSpace.jsp">新增場地</a></li>
-								<li><a href="<%=request.getContextPath()%>/frontend/space/listAllSpace.jsp">所有場地</a></li>
-							</ul>
-						</li>
-						<li>
-							<span><a href="<%=request.getContextPath()%>/frontend/spacedetail/spaceDetailHome.jsp">我的場地明細</a></span>
-							<ul>
-								<li><a href="<%=request.getContextPath()%>/frontend/spacedetail/addSpaceDetail.jsp">新增場地明細</a></li>
-								<li><a href="<%=request.getContextPath()%>/frontend/spacedetail/listAllSpaceDetail.jsp">所有場地明細</a></li>
-							</ul>
-						</li>
-						<li>
-							<span><a href="<%=request.getContextPath()%>/frontend/spacephoto/spacePhotoHome.jsp">場地照片</a></span>
-							<ul>
-								<li><a href="<%=request.getContextPath()%>/frontend/spacephoto/addSpacePhoto.jsp">新增場地照片</a></li>
-								<li><a href="<%=request.getContextPath()%>/frontend/spacephoto/listAllSpacePhoto.jsp">所有場地照片</a></li>
-							</ul>
-						</li>
-						<li>
-							<span><a href="<%=request.getContextPath()%>/frontend/spacecomment/spaceCommentHome.jsp">場地評價</a></span>
-							<ul>
-								<li><a href="<%=request.getContextPath()%>/frontend/spacecomment/addSpaceComment.jsp">新增場地評價</a></li>
-								<li><a href="<%=request.getContextPath()%>/frontend/spacecomment/listAllSpaceComment.jsp">所有場地評價</a></li>
-							</ul>
-						</li>
-					</ul>
-				</li>
-				<li><span><a></a></span>
-				</li>
-				<li><span><a></a></span>
-				</li>
-				<li><span><a></a></span>
-				</li>
-				<li><span><a></a></span>
-				</li>
-				<li><span><a></a></span>
-				</li>
-				<li><span><a></a></span>
-				</li>
-				<li><span><a></a></span>
-				</li>
-				<li><span><a></a></span>
-				</li>
-				<li><span><a></a></span>
-				</li>
-				<li><span><a></a></span>
-				</li>
-			</ul>
-		</nav>
-
-	</header>
-  <!-- /header -->
- 
+  <%@ include file="/frontend/header.jsp" %>
   <main>
 		
 		<section class="hero_in hotels">
 			<div class="wrapper">
 				<div class="container">
-					<h1 class="fadeInUp"><span></span>場地資料修改</h1>
+					<h1 class="fadeInUp"><span></span>修改場地資料</h1>
 				</div>
 			</div>
 		</section>
 		<!--/hero_in-->
 
 
-<FORM METHOD="post" ACTION="space.do" name="form1">
-<table>
-
-	<tr>
-		<td>場地ID:<font color=red><b>*</b></font></td>
-		<td><%=spaceVO.getSpaceId()%></td>
-	</tr>
-	<tr>
-		<td>會員ID:</td>
-		<td><input type="TEXT" name="memId" size="45" value="<%=spaceVO.getMemId()%>" /></td>
-	</tr>
-	<tr>
-		<td>員工ID:</td>
-		<td><input type="TEXT" name="empId" size="45" value="<%=spaceVO.getEmpId()%>" /></td>
-	</tr>
-	<tr>
-		<td>場地地址:</td>
-		<td><input type="TEXT" name="spaceAddress" size="45" value="<%=spaceVO.getSpaceAddress()%>" /></td>
-	</tr>
-	<tr>
-		<td>場地經度:</td>
-		<td><input type="TEXT" name="spaceLng" size="45" value="<%=spaceVO.getSpaceLng()%>"/></td>
-	</tr>
-	<tr>
-		<td>場地緯度:</td>
-		<td><input type="TEXT" name="spaceLat" size="45" value="<%=spaceVO.getSpaceLat()%>"/></td>
-	</tr>
-	<tr>
-		<td>場地名稱:</td>
-		<td><input type="TEXT" name="spaceName" size="45" value="<%=spaceVO.getSpaceName()%>" /></td>
-	</tr>
-	<tr>
-		<td>場地介紹:</td>
-		<td><input type="TEXT" name="spaceText" size="45" value="<%=spaceVO.getSpaceText()%>" /></td>
-	</tr>
-	<tr>
-		<td>場地類型:</td>
-		<td><input type="TEXT" name="spaceType" size="45" value="<%=spaceVO.getSpaceType()%>" /></td>
-	</tr>
-	<tr>
-		<td>場地設備:</td>
-		<td><input type="TEXT" name="spaceEquipment" size="45" value="<%=spaceVO.getSpaceEquipment()%>" /></td>
-	</tr>
-	<tr>
-		<td>場地容納人數:</td>
-		<td><input type="TEXT" name="spaceContain" size="45"	value="<%=spaceVO.getSpaceContain()%>" /></td>
-	</tr>
-	<tr>
-		<td>場地規則:</td>
-		<td><input type="TEXT" name="spaceRule" size="45"	value="<%=spaceVO.getSpaceRule()%>" /></td>
-	</tr>
-	<tr>
-		<td>場地退款須知:</td>
-		<td><input type="TEXT" name="spaceRefund" size="45"	value="<%=spaceVO.getSpaceRefund()%>" /></td>
-	</tr>
-	<tr>
-		<td>場地狀態:</td>
-		<td><input type="TEXT" name="spaceStatus" size="45"	value="<%=spaceVO.getSpaceStatus()%>" /></td>
-	</tr>
-	<tr>
-		<td>場地註冊日期:</td>
-		<td><input name="spaceSignupDate" id="f_date1" type="text" ></td>
-	</tr>
-	<tr>
-		<td>場地上架日期:</td>
-		<td><input name="spaceOnsaleDate" id="f_date1" type="text" ></td>
-	</tr>
-	<tr>
-		<td>場地下架日期:</td>
-		<td><input name="spaceOffsaleDate" id="f_date1" type="text" ></td>
-	</tr>
-
-	<jsp:useBean id="spaceSvc" scope="page" class="com.space.model.SpaceService" />
-	
-	
-
-</table>
-<br>
-<input type="hidden" name="action" value="update">
-<input type="hidden" name="spaceId" value="<%=spaceVO.getSpaceId()%>">
-<input type="submit" value="送出修改"></FORM>
-
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/space/space.do" name="form1">
+<div class="content-wrapper">
+    <div class="container-fluid">
+		<div class="box_general padding_bottom">
+			<div class="header_box version_2">
+				<h2><i class="fa fa-file"></i>修改場地</h2>
+			</div>
+			<div class="row">										
+				<div class="col-md-4">
+					<div class="form-group">
+						<label>場地名稱</label>
+						<input type="text" name="spaceName" class="form-control" value="<%= (spaceVO == null)? "" : spaceVO.getSpaceName()%>"/>
+						<span style="color:red"><%= (errorMessages == null)? "" : (!spaceVO.getSpaceName().equals(""))? "" : "  " + errorMessages.poll()%></span>
+					</div>
+				</div>
+				<div class="col-md-8">
+					<div class="form-group">
+						<label>場地地址</label>
+						<input type="text" name="spaceAddress" class="form-control" value="<%= (spaceVO == null)? "" : spaceVO.getSpaceAddress()%>"/>
+						<span style="color:red"><%= (errorMessages == null)? "" : (!spaceVO.getSpaceAddress().equals(""))? "" : "  " + errorMessages.poll()%></span>
+					</div>
+				</div>
+			</div>
+			<!-- /row-->
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label>場地設備</label>
+							<br><input type="checkbox" name="spaceEquipment" class="form-group" value="WIFI" <%=(spaceEqAll.contains("WIFI") ? "Checked":"")%>/>&nbsp;<img src="<%=request.getContextPath()%>/plugins/img/hotel_facilites_icon_4.svg" alt="">&nbsp;WIFI
+							<br><input type="checkbox" name="spaceEquipment" class="form-group" value="冷氣:" <%=(spaceEqAll.contains("冷氣") ? "Checked":"")%>/>&nbsp;<img src="<%=request.getContextPath()%>/plugins/img/hotel_facilites_icon_7.svg" alt="">&nbsp;冷氣
+							<br><input type="checkbox" name="spaceEquipment" class="form-group" value="咖啡機:" <%=(spaceEqAll.contains("咖啡機") ? "Checked":"")%>/>&nbsp;<img src="<%=request.getContextPath()%>/plugins/img/hotel_facilites_icon_1.svg" alt="">&nbsp;咖啡機
+							<br><input type="checkbox" name="spaceEquipment" class="form-group" value="吹風機:" <%=(spaceEqAll.contains("吹風機") ? "Checked":"")%>/>&nbsp;<img src="<%=request.getContextPath()%>/plugins/img/hotel_facilites_icon_8.svg" alt="">&nbsp;吹風機
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label>其他設備</label><input type="text" name="spaceEquipment" class="form-control" value="<%= spaceEqSplit[spaceEqSplit.length-1] %>">
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label>場地類型</label>
+						<div class="styled2-select">
+							<select name="spaceType">
+							  <option <%=(spaceVO.getSpaceType().contains("會議")? "selected":"")%>>會議</option>
+							  <option <%=(spaceVO.getSpaceType().contains("聚會")? "selected":"")%>>聚會</option>
+							  <option <%=(spaceVO.getSpaceType().contains("私人談話")? "selected":"")%>>私人談話</option>
+							  <option <%=(spaceVO.getSpaceType().contains("活動")? "selected":"")%>>活動</option>
+							  <option <%=(spaceVO.getSpaceType().contains("其他")? "selected":"")%>>其他</option>
+							</select>
+					  </div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label>場地容納人數</label>
+						<div class="styled2-select">
+							<select name="spaceContain">
+							  <option <%=(spaceVO.getSpaceContain().contains("10")? "selected":"") %>>10</option>
+							  <option <%=(spaceVO.getSpaceContain().contains("20")? "selected":"") %>>20</option>
+							  <option <%=(spaceVO.getSpaceContain().contains("30")? "selected":"") %>>30</option>
+							  <option <%=(spaceVO.getSpaceContain().contains("40")? "selected":"") %>>40</option>
+							  <option <%=(spaceVO.getSpaceContain().contains("50")? "selected":"") %>>50</option>
+							</select>
+					    </div>
+					</div>
+				</div>
+			</div>
+			<!-- /row-->
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label>場地介紹</label>
+						<textarea name="spaceText" class="form-control" rows="5">新增場地介紹</textarea>
+					</div>
+				</div>
+			</div>			
+			<!-- /row-->
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label>場地規則</label>
+						<textarea name="spaceRule" class="form-control" rows="5">新增場地規則</textarea>
+					</div>
+				</div>
+			</div>
+			<!-- /row-->
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label>場地退款須知</label>
+						<textarea name="spaceRefund" class="form-control" rows="5">新增場地場地退款須知</textarea>
+					</div>
+				</div>
+			</div>			
+		<!-- /row-->
+		</div>    
+		<!-- /box_general-->
+		<p>
+			<input type="hidden" name="action" value="update">
+			<input type="hidden" name="spaceId" value="<%=spaceVO.getSpaceId()%>">
+			<input type="hidden" name="spaceLng" value="<%=spaceVO.getSpaceLng()%>">
+			<input type="hidden" name="spaceLat" value="<%=spaceVO.getSpaceLat()%>">
+            <input type="submit" value="儲存變更" class="btn_1 medium">
+		</p>
+		</div>
+  </div>
+</FORM>
 </main>
 <!--/main-->
 

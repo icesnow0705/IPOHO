@@ -1,6 +1,4 @@
-package com.spacephoto.model;
-
-import com.spacephoto.model.*;
+package com.spacePhoto.model;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -11,13 +9,13 @@ import java.util.List;
 
 public class TestJDBC {
 	public static void main(String[] args) {
-
-		SpacePhotoDAO_interface dao = new SpacePhotoDAO();
-
+		
+		SpacePhotoDAOInterfaceB dao = new SpacePhotoDAOB();
+		
 		ByteArrayOutputStream baos = null;
 		try {
-//			File file = new File("C:\\Users\\HENRYZ\\Desktop\\all_rubbish.jpg");
-			File file = new File("C:\\Users\\HENRYZ\\Desktop\\zzz.jpg");
+			File file = new File("C:\\Users\\user\\Desktop\\TEA101G2\\BlobTest1.jpg");
+//			File file = new File("C:\\Users\\user\\Desktop\\TEA101G2\\BlobTest2.jpg");
 			FileInputStream fis = new FileInputStream(file);
 			baos = new ByteArrayOutputStream();
 			byte[] buffer = new byte[8192];
@@ -32,55 +30,40 @@ public class TestJDBC {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		// All
-//		List<SpacePhotoVO> list = dao.getAll();
-//		for(SpacePhotoVO spacePhotoVO : list) {
-//			System.out.println(spacePhotoVO.getSpacePhotoId());
-//			System.out.println(spacePhotoVO.getSpaceId());
-//			System.out.println(spacePhotoVO.getSpacePhoto());
-//		}		
-//		System.out.println("Test All");
-
-		// One
-//		SpacePhotoVO one = dao.selectOne("SPACEPHOTO0000001");
-//		System.out.println(one.getSpacePhotoId());
-//		System.out.println(one.getSpaceId());
-//		System.out.println(one.getSpacePhoto());
-//		System.out.println("Test One");
-//		
-		// One
-//		SpacePhotoService sps = new SpacePhotoService();
-//		List<SpacePhotoVO> one = sps.getDefaultPhoto("SPACE00002");
-//		for(SpacePhotoVO s : one) {
-//			System.out.println(s.getSpacePhotoId());
-//			System.out.println(s.getSpaceId());
-//			System.out.println(s.getSpacePhoto());
-//			System.out.println("Test One");
-//		}
 		
-		SpacePhotoService sps = new SpacePhotoService();
-		String photo = sps.getDefaultFirstPhoto("SPACE00002");
-		System.out.println(photo);
-
-		// insert
+		//All
+//		List<SpacePhotoVO> list = dao.selectAll();
+//		for(SpacePhotoVO spacePhotoVO : list) {
+//			System.out.println(spacePhotoVO.getSpacePhoto());
+//			System.out.println(spacePhotoVO.getSpacePhotoBase64());
+//		}		
+//		System.out.println("FUCK");
+		
+		//One
+//		SpacePhotoVO one = dao.selectOne("20");
+//		System.out.println(one.getSpacePhoto());
+//		System.out.println(one.getSpacePhotoBase64());
+		
+		//insert
 //		SpacePhotoVO add = new SpacePhotoVO();
-//		add.setSpaceId("SPACE00001");
+//		add.setSpaceId("20");
 //		add.setSpacePhoto(baos.toByteArray());
 //		dao.insert(add);
-//		System.out.println("Data Inserted");
-
-		// delete
-//		dao.delete("4");
-//		System.out.println("Data Deleted");
-
-		// update
-//		SpacePhotoVO update = new SpacePhotoVO();
-//		update.setSpacePhotoId("SPACEPHOTO0000003");
-//		update.setSpaceId("SPACE00002");
-//		update.setSpacePhoto(baos.toByteArray());
-//		dao.update(update);
-//		System.out.println("data updated");
-
+//		System.out.println("FUCK");
+		
+		//delete
+//		dao.delete("10");
+//		System.out.println("FUCK");
+		
+		//update
+		SpacePhotoVO update = new SpacePhotoVO();
+		update.setSpacePhotoId("120");
+		update.setSpaceId("20");
+		update.setSpacePhoto(baos.toByteArray());
+		dao.update(update);
+		System.out.println("FUCK");
+		
 	}
+	
+
 }

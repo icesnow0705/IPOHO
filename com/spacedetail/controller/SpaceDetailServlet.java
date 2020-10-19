@@ -1,4 +1,4 @@
-package com.spacedetail.controller;
+package com.spaceDetail.controller;
 
 import java.io.*;
 import java.util.*;
@@ -20,7 +20,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import com.spacedetail.model.*;
+import com.orderDetail.model.OrderDetailVO;
+import com.orderMaster.model.OrderMasterVO;
+import com.spaceDetail.model.*;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 @WebServlet("/spacedetail/spacedetail.do")
@@ -54,11 +56,6 @@ public class SpaceDetailServlet extends HttpServlet {
 					return;// 程式中斷
 				}
 
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacedetail/spaceDetailHome");
-					failureView.forward(req, res);
-					return;// 程式中斷
-				}
 
 				/*************************** 2.開始查詢資料 *****************************************/
 				SpaceDetailService spaceDetailSvc = new SpaceDetailService();
@@ -73,7 +70,7 @@ public class SpaceDetailServlet extends HttpServlet {
 					return;// 程式中斷
 				}
 
-				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) ********************************/
 				req.setAttribute("spaceDetailVO", spaceDetailVO); // 資料庫取出的spaceDetailVO物件,存入req
 				String url = "/frontend/spacedetail/listOneSpaceDetail.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneSpaceDetail.jsp
@@ -87,7 +84,7 @@ public class SpaceDetailServlet extends HttpServlet {
 			}
 		}
 		
-		if ("getOne_For_Update".equals(action)) { // 來自listAllSpaceDetail.jsp的請求
+		if ("getOne_For_Update".equals(action)) { // 來自listAllSpaceDetailForEdit.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -115,24 +112,114 @@ public class SpaceDetailServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-
-		if ("update".equals(action)) { // 來自update_spacedetail_input.jsp的請求
+		
+		/***************************** 場主按下"編輯場地明細"按鈕後執行 *****************************/
+		if ("listAllSpaceDetailBySpaceForEdit".equals(action)) {
+			Queue<String> errorMessages = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMessages);
+			
+			try {
+				/************************** 用spaceId把spaceDetailId撈出來 ******************************/
+				String spaceId = req.getParameter("spaceId");
+				if (spaceId == null || (spaceId.trim()).length() == 0) {
+					errorMessages.add("請輸入場地ID");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMessages.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontend/space/spaceHome.jsp");
+					failureView.forward(req, res);
+					return;// 程式中斷
+				}
+				/************************************* 開始撈資料 *************************************************/
+				SpaceDetailService spaceDetailSvc = new SpaceDetailService();
+				List<SpaceDetailVO> spaceDetailIdList = spaceDetailSvc.getSpaceIdList(spaceId);
+				System.out.println(spaceDetailIdList);
+				if (spaceDetailIdList == null) {
+					errorMessages.add("查無資料");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMessages.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacedetail/spaceDetailHome");
+					failureView.forward(req, res);
+					return;// 程式中斷
+				}
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) ********************************/
+				req.setAttribute("spaceDetailIdList", spaceDetailIdList); // 資料庫取出的spaceDetailVO物件,存入req
+				req.setAttribute("spaceId", spaceId);
+				String url = "/frontend/spacedetail/listAllSpaceDetailForEdit.jsp";
+				RequestDispatcher sucessVeiw = req.getRequestDispatcher(url);
+				sucessVeiw.forward(req, res);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				errorMessages.add(e.getMessage());
+				RequestDispatcher exceptionView = req.getRequestDispatcher("/frontend/error.jsp");
+				exceptionView.forward(req, res);
+			}
+		}
+		/************************** 按下listOneSpace中訂購按鈕後執行 ******************************/
+		if ("listAllSpaceDetailBySpace".equals(action)) {
+			Queue<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			try {
+				/************************** 用spaceId把spaceDetailId撈出來 ******************************/
+				String str = req.getParameter("spaceId");
+				if (str == null || (str.trim()).length() == 0) {
+					errorMsgs.add("請輸入場地ID");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontend/space/spaceHome.jsp");
+					failureView.forward(req, res);
+					return;// 程式中斷
+				}
+				/************************************* 開始撈資料 *************************************************/
+				SpaceDetailService spaceDetailSvc = new SpaceDetailService();
+				List<SpaceDetailVO> spaceDetailIdList = spaceDetailSvc.getSpaceIdList(str);
+				System.out.println(spaceDetailIdList);
+				if (spaceDetailIdList == null) {
+					errorMsgs.add("查無資料");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacedetail/spaceDetailHome");
+					failureView.forward(req, res);
+					return;// 程式中斷
+				}
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) ********************************/
+				req.setAttribute("spaceDetailIdList", spaceDetailIdList); // 資料庫取出的spaceDetailVO物件,存入req
+				String url = "/frontend/spacedetail/listAllSpaceDetail.jsp";
+				RequestDispatcher sucessVeiw = req.getRequestDispatcher(url);
+				sucessVeiw.forward(req, res);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher exceptionView = req.getRequestDispatcher("/frontend/error.jsp");
+				exceptionView.forward(req, res);
+			}
+		}
+		
+		if ("update".equals(action)) { // 來自updateSpaceDetail.jsp的請求
 			List<String> errorMessages = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
-			req.setAttribute("errorMsgs", errorMessages);
+			req.setAttribute("errorMessages", errorMessages);
+			List<String> justChangeAmount = new LinkedList<String>();
+			req.setAttribute("justChangeAmount", justChangeAmount);
 			
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 
 				String spaceDetailId = new String(req.getParameter("spaceDetailId").trim());
 				if (spaceDetailId == null || spaceDetailId.trim().length() == 0) {
-					errorMessages.add("場地明細ID請勿空白");
+					errorMessages.add("場地明細ID是空白的!");
 				}
 
 				String spaceId = req.getParameter("spaceId");
 				if (spaceId == null || spaceId.trim().length() == 0) {
-					errorMessages.add("場地ID請勿空白");
+					errorMessages.add("場地ID是空白的!");
 				}
 
 				java.sql.Date spaceDetailFreeDate = null;
@@ -168,6 +255,40 @@ public class SpaceDetailServlet extends HttpServlet {
 					errorMessages.add("場地租借費用: 必須為數字");
 				}
 				
+				/*************************** 判斷新的場地明細時間是否與已建立的場地明細時間重覆 ********************************/
+				SpaceDetailService spaceDetailSvc = new SpaceDetailService();
+				List<SpaceDetailVO> spaceDetailIdList = spaceDetailSvc.getSpaceIdList(spaceId);
+				Long freeTimeStart = spaceDetailFreeTimeStart.getTime();
+				Long freeTimeEnd = spaceDetailFreeTimeEnd.getTime();
+				
+				if(freeTimeStart == null || freeTimeStart.equals(null) || freeTimeEnd == null || freeTimeEnd.equals(null)) {
+					errorMessages.add("請輸入場地租借起始/結束時間");
+				}
+				
+				if(freeTimeEnd-freeTimeStart <= 0) {
+					errorMessages.add("請確認場地租借起始/結束時間");
+				}
+				
+				for(SpaceDetailVO spaceDetailVO : spaceDetailIdList) {
+					Long oldFreeTimeStart = spaceDetailVO.getSpaceDetailFreeTimeStart().getTime();
+					Long oldFreeTimeEnd = spaceDetailVO.getSpaceDetailFreeTimeEnd().getTime();
+					System.out.print(oldFreeTimeStart+"/");
+					System.out.print(oldFreeTimeEnd+"/");
+					System.out.print(freeTimeStart+"/");
+					System.out.println(freeTimeEnd);
+					if((freeTimeStart).equals(oldFreeTimeStart) && (freeTimeEnd).equals(oldFreeTimeEnd)) {
+						justChangeAmount.add("只是改個金額，放行!");
+					}
+					if((freeTimeStart >= oldFreeTimeStart) && (freeTimeStart < oldFreeTimeEnd)) {
+						errorMessages.add("該時段起始時間已有設定");
+					}
+					if((freeTimeEnd > oldFreeTimeStart) && (freeTimeEnd <= oldFreeTimeEnd)) {
+						errorMessages.add("該時段結束時間已有設定");
+					}
+					if((freeTimeStart <= oldFreeTimeStart) && (freeTimeEnd >= oldFreeTimeEnd)) {
+						errorMessages.add("該時段已設定付費");
+					}
+				}
 				
 				SpaceDetailVO spaceDetailVO = new SpaceDetailVO();
 				spaceDetailVO.setSpaceDetailId(spaceDetailId);
@@ -179,19 +300,21 @@ public class SpaceDetailServlet extends HttpServlet {
 				
 				// Send the use back to the form, if there were errors
 				if (!errorMessages.isEmpty()) {
-					req.setAttribute("spaceDetailVO", spaceDetailVO); // 含有輸入格式錯誤的spaceDetailVO物件,也存入req
-					RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacedetail/updateSpaceDetail.jsp");
-					failureView.forward(req, res);
-					return; // 程式中斷
+					if(justChangeAmount.isEmpty()) {
+						req.setAttribute("spaceDetailVO", spaceDetailVO);
+						RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacedetail/updateSpaceDetail.jsp");
+						failureView.forward(req, res);
+						System.out.println("知錯了...準備轉交原畫面");
+						return;
+					}
 				}
 
 				/*************************** 2.開始修改資料 *****************************************/
-				SpaceDetailService spaceDetailSvc = new SpaceDetailService();
 				spaceDetailVO = spaceDetailSvc.updateSpaceDetail(spaceDetailVO);
-				System.out.println(spaceDetailVO);
+				System.out.println(spaceDetailVO + "修改完畢");
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-				req.setAttribute("spaceDetailVO", spaceDetailVO);
-				String url = "/frontend/spacedetail/listOneSpaceDetail.jsp";
+//				req.setAttribute("spaceDetailVO", spaceDetailVO);
+				String url = "/frontend/space/listAllSpaceForEdit.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				
@@ -210,15 +333,10 @@ public class SpaceDetailServlet extends HttpServlet {
 			req.setAttribute("errorMessages", errorMessages);
 
 			try {
-				
-				String spaceDetailId = new String(req.getParameter("spaceDetailId").trim());
-				if (spaceDetailId == null || spaceDetailId.trim().length() == 0) {
-					errorMessages.add("場地明細ID請勿空白");
-				}
 
 				String spaceId = req.getParameter("spaceId");
 				if (spaceId == null || spaceId.trim().length() == 0) {
-					errorMessages.add("場地ID請勿空白");
+					errorMessages.add("場地ID是空白的!!");
 				}
 
 				java.sql.Date spaceDetailFreeDate = null;
@@ -254,29 +372,60 @@ public class SpaceDetailServlet extends HttpServlet {
 					errorMessages.add("場地租借費用: 必須為數字");
 				}
 				
+				/*************************** 判斷新的場地明細時間是否與已建立的場地明細時間重覆 ********************************/
+				SpaceDetailService spaceDetailSvc = new SpaceDetailService();
+				List<SpaceDetailVO> spaceDetailIdList = spaceDetailSvc.getSpaceIdList(spaceId);
+				Long freeTimeStart = spaceDetailFreeTimeStart.getTime();
+				Long freeTimeEnd = spaceDetailFreeTimeEnd.getTime();
+				
+				if(freeTimeStart == null || freeTimeStart.equals(null) || freeTimeEnd == null || freeTimeEnd.equals(null)) {
+					errorMessages.add("請輸入場地租借起始/結束時間");
+				}
+				
+				if(freeTimeEnd-freeTimeStart <= 0) {
+					errorMessages.add("請確認場地租借起始/結束時間");
+				}
+				
+				for(SpaceDetailVO spaceDetailVO : spaceDetailIdList) {
+					Long oldFreeTimeStart = spaceDetailVO.getSpaceDetailFreeTimeStart().getTime();
+					Long oldFreeTimeEnd = spaceDetailVO.getSpaceDetailFreeTimeEnd().getTime();
+					if((freeTimeStart >= oldFreeTimeStart) && (freeTimeStart < oldFreeTimeEnd)) {
+						errorMessages.add("該時段起始時間已有設定");
+					}
+					if((freeTimeEnd > oldFreeTimeStart) && (freeTimeEnd <= oldFreeTimeEnd)) {
+						errorMessages.add("該時段結束時間已有設定");
+					}
+					if((freeTimeStart <= oldFreeTimeStart) && (freeTimeEnd >= oldFreeTimeEnd)) {
+						errorMessages.add("該時段已有資料");
+					}
+				}
 				
 				SpaceDetailVO spaceDetailVO = new SpaceDetailVO();
-				spaceDetailVO.setSpaceDetailId(spaceDetailId);
 				spaceDetailVO.setSpaceId(spaceId);
 				spaceDetailVO.setSpaceDetailFreeDate(spaceDetailFreeDate);
 				spaceDetailVO.setSpaceDetailFreeTimeStart(spaceDetailFreeTimeStart);
 				spaceDetailVO.setSpaceDetailFreeTimeEnd(spaceDetailFreeTimeEnd);
 				spaceDetailVO.setSpaceDetailCharge(spaceDetailCharge);
 				
-				
+				System.out.println(errorMessages);
 //				 Send the use back to the form, if there were errors
 				if (!errorMessages.isEmpty()) {
-					req.setAttribute("spaceDetailVO", spaceDetailVO); 
-					RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacedetail/addSpaceDetail.jsp");
+					req.setAttribute("spaceId", spaceId);
+					req.setAttribute("spaceDetailIdList", spaceDetailIdList);
+					req.setAttribute("spaceDetailVO", spaceDetailVO);
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacedetail/listAllSpaceDetailForEdit.jsp");
 					failureView.forward(req, res);
+					System.out.println("知錯了...準備轉交原畫面");
+					return;
 				}
 				/*************************** 2.新增資料 ***************************************/
-				SpaceDetailService spaceDetailSvc = new SpaceDetailService();
 				spaceDetailVO = spaceDetailSvc.addSpaceDetail(spaceDetailVO);
-				System.out.println(spaceDetailVO);
+				System.out.println("新增的訂單明細：" + spaceDetailVO);
 				
 				/*************************** 3.資料轉交(Send the Success view) ***********/
-				String url = "/frontend/spacedetail/listAllSpaceDetail.jsp";
+				req.setAttribute("spaceId", spaceId);
+				req.setAttribute("spaceDetailIdList", spaceDetailIdList);
+				String url = "/frontend/spacedetail/listAllSpaceDetailForEdit.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
@@ -284,7 +433,7 @@ public class SpaceDetailServlet extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 				errorMessages.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacedetail/addSpaceDetail.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacedetail/spaceDetailHome.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -305,14 +454,14 @@ public class SpaceDetailServlet extends HttpServlet {
 				spaceDetailSvc.deleteSpaceDetail(spaceDetailId);
 
 				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-				String url = "/frontend/spacedetail/listAllSpaceDetail.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+				String url = "/frontend/space/listAllSpaceForEdit.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交listAllSpaceForEdit.jsp
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacedetail/listAllSpaceDetail.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontend/spacedetail/listAllSpaceDetailForEdit.jsp");
 				failureView.forward(req, res);
 			}
 		}

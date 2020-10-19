@@ -1,78 +1,60 @@
-package com.spacecomment.model;
+package com.spaceComment.model;
 
 import java.util.List;
 
-import com.spacecomment.model.*;
+import com.memberComment.model.MemberCommentVO;
 
 public class TestJDBC {
-public static void main(String[] args) {
+	public static void main(String[] args) {
+	
+//		SpaceCommDAOInterface dao = new SpaceCommDAO();
+//		List<SpaceCommVO> list = dao.selectAll();
 		
-		SpaceCommentDAO_interface dao = new SpaceCommentDAO();
-		
-//		ByteArrayOutputStream baos = null;
-//		try {
-//			File file = new File("C:\\Users\\user\\Desktop\\allshit.gif");
-//			File file = new File("C:\\Users\\HENRYZ\\Desktop\\zzz.jpg");
-//			FileInputStream fis = new FileInputStream(file);
-//			baos = new ByteArrayOutputStream();
-//			byte[] buffer = new byte[8192];
-//			int i;
-//			while ((i = fis.read(buffer)) != -1) {
-//				baos.write(buffer, 0, i);
-//			}
-//			baos.close();
-//			fis.close();
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-		
-		//All
-//		List<SpaceCommentVO> list = dao.getAll();
-//		for(SpaceCommentVO spaceCommentVO : list) {
-//			System.out.println(spaceCommentVO.getSpaceCommentId());
-//			System.out.println(spaceCommentVO.getSpaceId());
-//			System.out.println(spaceCommentVO.getMemId());
-//			System.out.println(spaceCommentVO.getSpaceCommentContent());
-//			System.out.println(spaceCommentVO.getSpaceCommentLevel());
-//			System.out.println(spaceCommentVO.getSpaceCommentDate());
+//		for(SpaceCommVO spaceCommVO : list) {
+//			System.out.println(spaceCommVO.getSpaceId());
 //		}		
-//		System.out.println("Test All");
 		
-		//One
-//		SpaceCommentVO one = dao.selectOne("SCOMMENT00001");
-//		System.out.println(one.getSpaceCommentId());
+		//selectone
+//		SpaceCommVO one = dao.selectOne("SCOMMENT00001");
 //		System.out.println(one.getSpaceId());
-//		System.out.println(one.getMemId());
-//		System.out.println(one.getSpaceCommentContent());
-//		System.out.println(one.getSpaceCommentLevel());
-//		System.out.println(one.getSpaceCommentDate());
-//		System.out.println("Test One");
 		
-		//insert
-//		SpaceCommentVO add = new SpaceCommentVO();
-//		add.setSpaceId("SPACE00001");
-//		add.setMemId("MEM00004");
-//		add.setSpaceCommentContent("廁所很臭");
-//		add.setSpaceCommentLevel(1.5);
-//		add.setSpaceCommentDate(java.sql.Date.valueOf("2020-09-21"));
+		//add
+//		SpaceCommVO add = new SpaceCommVO();
+//		add.setSpaceId("SPACE00003");
+//		add.setMemberId("MEM00001");
+//		add.setComm("YOYOOYOYOYO");
+//		add.setCommLevel(3);
+//		add.setCommDate(java.sql.Date.valueOf("2020-09-01"));
 //		dao.insert(add);
-//		System.out.println("Data Inserted");
+//		System.out.println("FUCK");
+		
+		//selectall
+//		SpaceCommVO selectOne = new SpaceCommVO();
+//		selectOne = dao.selectOne("20");
+//		System.out.println(selectOne.getMemberId());
+//		System.out.println(selectOne.getCommLevel());
+		
+		//selectallBySpace
+//		SpaceCommServiceB scs = new SpaceCommServiceB();
+//		List<SpaceCommentVO> list = scs.selectAllSpaceCommBySpace("SPACE00002");
+//		for(SpaceCommentVO SpaceCommVO : list) {
+//			System.out.println(SpaceCommVO.getComm());
+//		}		
 		
 		//delete
-//		dao.delete("4");
-//		System.out.println("Data Deleted");
+//		dao.delete("50");
 		
 		//update
-		SpaceCommentVO update = new SpaceCommentVO();
-		update.setSpaceCommentId("SCOMMENT00003");
-		update.setSpaceId("SPACE00003");
-		update.setMemId("MEM00004");
-		update.setSpaceCommentContent("有點貴之外，其他方面都很好");
-		update.setSpaceCommentLevel(3.5);
-		update.setSpaceCommentDate(java.sql.Date.valueOf("2020-08-22"));
-		dao.update(update);
-		System.out.println("data updated");
+//		SpaceCommVO update = new SpaceCommVO();
+//		update.setSpaceCommId("SCOMMENT00005");
+//		update.setSpaceId("SPACE00003");
+//		update.setMemberId("MEM00002");
+//		update.setComm("YAYAYYAYA");
+//		update.setCommLevel(3);
+//		update.setCommDate(java.sql.Date.valueOf("2020-09-01"));
+//		dao.update(update);
+//		System.out.println("FUCK");
+		
 	}
+
 }

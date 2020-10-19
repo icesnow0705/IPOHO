@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.spacecomment.model.*"%>
+<%@ page import="com.spaceComment.model.*"%>
 <%@ page import="java.util.*"%>
 
 <%
@@ -131,7 +131,7 @@
 	</tr>
 	<tr>
 		<td>會員ID:</td>
-		<td><input type="TEXT" name="memId" size="45" value="<%=spaceCommentVO.getMemId()%>" /></td>
+		<td><input type="TEXT" name="memId" size="45" value="<%=spaceCommentVO.getMemberId()%>" /></td>
 	</tr>
 	<tr>
 		<td>場地評價內容:</td>

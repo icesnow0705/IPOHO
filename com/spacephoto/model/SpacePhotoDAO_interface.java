@@ -1,4 +1,4 @@
-package com.spacephoto.model;
+package com.spacePhoto.model;
 
 import java.util.List;
 

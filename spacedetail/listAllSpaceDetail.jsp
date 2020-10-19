@@ -1,21 +1,22 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.spacedetail.model.*"%>
+<%@ page import="com.spaceDetail.model.*"%>
 
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
-    SpaceDetailService spaceDetailSvc = new SpaceDetailService();
-    List<SpaceDetailVO> list = spaceDetailSvc.getAll();
-    pageContext.setAttribute("list",list);
+	List<SpaceDetailVO> list = (List<SpaceDetailVO>)request.getAttribute("spaceDetailIdList");
+	SpaceDetailService spaceDetailSvc = new SpaceDetailService();
+    pageContext.setAttribute("list", list);
+    LinkedList<String> errorMsgs = (LinkedList<String>) request.getAttribute("errorMsgs");
 %>
 
 
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>所有場地明細</title>
+<title>預訂頁面</title>
 
 <!-- GOOGLE WEB FONT -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -32,157 +33,264 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<!-- jQuery v3.4.1 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Moment.js v2.20.0 -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.0/moment.min.js"></script>
+
+<!-- FullCalendar v3.8.1 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.1/fullcalendar.min.css" rel="stylesheet"  />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.1/fullcalendar.print.css" rel="stylesheet" media="print"></link>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.1/fullcalendar.min.js"></script>  	
   	
 </head>
 
 <body>
 
 <div id="page">
-		
-	<header class="header menu_fixed">
-		<div id="preloader"><div data-loader="circle-side"></div></div><!-- /Page Preload -->
-		<div id="logo">
-			<a href="<%=request.getContextPath()%>/frontend/space/spaceHome.jsp">
-				<img src="<%=request.getContextPath()%>/plugins/img/logo.svg" width="150" height="36" alt="" class="logo_normal">
-				<img src="<%=request.getContextPath()%>/plugins/img/logo_sticky.svg" width="150" height="36" alt="" class="logo_sticky">
-			</a>
-		</div>		
-		<ul id="top_menu">
-			<li><a href="cart-1.html" class="cart-menu-btn" title="Cart"><strong>4</strong></a></li>
-			<li><a href="#sign-in-dialog" id="sign-in" class="login" title="Sign In">Sign In</a></li>
-			<li><a href="wishlist.html" class="wishlist_bt_top" title="Your wishlist">Your wishlist</a></li>
-		</ul>
-		<!-- /top_menu -->
-		<a href="#menu" class="btn_mobile">
-			<div class="hamburger hamburger--spin" id="hamburger">
-				<div class="hamburger-box">
-					<div class="hamburger-inner"></div>
-				</div>
-			</div>
-		</a>
-		<nav id="menu" class="main-menu">
-			<ul>
-				<li><span><a href="<%=request.getContextPath()%>/frontend/space/spaceHome.jsp">場地</a></span>
-					<ul>
-						<li>
-							<span><a href="<%=request.getContextPath()%>/frontend/space/spaceHome.jsp">我的場地</a></span>
-							<ul>
-								<li><a href="<%=request.getContextPath()%>/frontend/space/addSpace.jsp">新增場地</a></li>
-								<li><a href="<%=request.getContextPath()%>/frontend/space/listAllSpace.jsp">所有場地</a></li>
-							</ul>
-						</li>
-						<li>
-							<span><a href="<%=request.getContextPath()%>/frontend/spacedetail/spaceDetailHome.jsp">我的場地明細</a></span>
-							<ul>
-								<li><a href="<%=request.getContextPath()%>/frontend/spacedetail/addSpaceDetail.jsp">新增場地明細</a></li>
-								<li><a href="<%=request.getContextPath()%>/frontend/spacedetail/listAllSpaceDetail.jsp">所有場地明細</a></li>
-							</ul>
-						</li>
-						<li>
-							<span><a href="<%=request.getContextPath()%>/frontend/spacephoto/spacePhotoHome.jsp">場地照片</a></span>
-							<ul>
-								<li><a href="<%=request.getContextPath()%>/frontend/spacephoto/addSpacePhoto.jsp">新增場地照片</a></li>
-								<li><a href="<%=request.getContextPath()%>/frontend/spacephoto/listAllSpacePhoto.jsp">所有場地照片</a></li>
-							</ul>
-						</li>
-						<li>
-							<span><a href="<%=request.getContextPath()%>/frontend/spacecomment/spaceCommentHome.jsp">場地評價</a></span>
-							<ul>
-								<li><a href="<%=request.getContextPath()%>/frontend/spacecomment/addSpaceComment.jsp">新增場地評價</a></li>
-								<li><a href="<%=request.getContextPath()%>/frontend/spacecomment/listAllSpaceComment.jsp">所有場地評價</a></li>
-							</ul>
-						</li>
-					</ul>
-				</li>
-				<li><span><a></a></span>
-				</li>
-				<li><span><a></a></span>
-				</li>
-				<li><span><a></a></span>
-				</li>
-				<li><span><a></a></span>
-				</li>
-				<li><span><a></a></span>
-				</li>
-				<li><span><a></a></span>
-				</li>
-				<li><span><a></a></span>
-				</li>
-				<li><span><a></a></span>
-				</li>
-				<li><span><a></a></span>
-				</li>
-				<li><span><a></a></span>
-				</li>
-			</ul>
-		</nav>
-	</header>
-  <!-- /header -->
-
+<%@ include file="/frontend/header.jsp" %>		
+  
   <main>
 		
 		<section class="hero_in hotels">
 			<div class="wrapper">
 				<div class="container">
-					<h1 class="fadeInUp"><span></span>所有場地明細</h1>
+					<h1 class="fadeInUp"><span></span>預訂頁面</h1>
 				</div>
 			</div>
 		</section>
 		<!--/hero_in-->
+  </main>
+  <!--/main-->
+</div>
+<!-- page -->
 
-<table class="table">
-  <thead>
-	<tr>
-		<th>場地明細ID</th>
-		<th>場地ID</th>
+<!-- calendar -->
+<div id="example"></div>
+
+<!-- 要預訂的選項 -->
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/OrderMasterServlet" name="form1">
+  <table class="table">
+    <thead>
+	  <tr>
 		<th>場地開放日期</th>
 		<th>場地開放起始時間</th>
 		<th>場地開放結束時間</th>
-		<th>場地租借費用</th>
-	</tr>
-  </thead>
-	<%@ include file="page1.file" %> 
-	<c:forEach var="spaceDetailVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+		<th>場地租借費用(每小時)</th>
+		<th>場地預訂起始時間</th>
+		<th>場地預訂結束時間</th>
+	  </tr>
+    </thead>
+	<c:forEach var="spaceDetailVO" items="${list}" varStatus="status">
 	<tbody>	
 		<tr>
-			<td>${spaceDetailVO.spaceDetailId}</td>
-			<td>${spaceDetailVO.spaceId}</td>
 			<td>${spaceDetailVO.spaceDetailFreeDate}</td>
 			<td>${spaceDetailVO.spaceDetailFreeTimeStart}</td>
 			<td>${spaceDetailVO.spaceDetailFreeTimeEnd}</td>
 			<td>${spaceDetailVO.spaceDetailCharge}</td>
-			
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/spacedetail/spacedetail.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="修改">
-			     <input type="hidden" name="spaceDetailId"  value="${spaceDetailVO.spaceDetailId}">
-			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
+				<input name="rentStartTime" id="f_date2${status.index}" type="text" />
 			</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/spacedetail/spacedetail.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="刪除">
-			     <input type="hidden" name="spaceDetailId"  value="${spaceDetailVO.spaceDetailId}">
-			     <input type="hidden" name="action" value="delete"></FORM>
+				<input name="rentEndTime" id="f_date3${status.index}" type="text" />
 			</td>
+			<input type="hidden" name="spaceDetailId" value="${spaceDetailVO.spaceDetailId}">
+			<input type="hidden" name="spaceDetailCharge" value="${spaceDetailVO.spaceDetailCharge}">
 		</tr>
 	</tbody>
 	</c:forEach>
-</table>
-<%@ include file="page2.file" %>
-</main>
-<!--/main-->
-</div>
-<!-- page -->
+  </table>
+<!-- 設定OrderMaster資料 -->
+<input type="hidden" name="orderCreateDate" value="<%=new Date()%>">
+<input type="hidden" name="action" value="addOrderMasterwithOrderDetail">
+<input type="submit" value="送出預訂" class="btn_1 medium">
+</FORM>
 
+<!-- calendar scripts -->
+<script>
+  	$( "#example" ).fullCalendar({
+  		// 參數設定[註1]
+  		header: { // 頂部排版
+  			left: "prev,next today", // 左邊放置上一頁、下一頁和今天
+  			center: "場地時程", // 中間放置標題
+  			right: "month,basicWeek,basicDay" // 右邊放置月、周、天
+  		},
+  		defaultDate: 'new Date()', // 起始日期
+  		weekends: true, // 顯示星期六跟星期日
+  		editable: false,  // 啟動拖曳調整日期
+  		events: [ // 事件
+  			{ // 事件
+  				title: "約會",
+  				start: "2018-02-01"
+  			},
+  			{ // 事件(包含開始時間)
+  				title: "中餐",
+  				start: "2018-02-12T12:00:00"
+  			},
+  			{ // 事件(包含跨日開始時間、結束時間)
+  				title: "音樂節",
+  				start: "2018-02-07",
+  				end: "2018-02-10"
+  			},
+  			{ // 事件(包含開始時間、結束時間)
+  				title: "會議",
+  				start: "2018-02-12T10:30:00",
+  				end: "2018-02-12T12:30:00"
+  			},
+  			{ // 事件(設定連結)
+  				title: "Click for Google",
+  				url: "http://google.com/",
+  				start: "2018-02-28"
+  			}
+  		]
+  	});
+</script>
 <!-- COMMON SCRIPTS -->
   	<script src="<%=request.getContextPath()%>/plugins/js/common_scripts.js"></script>
   	<script src="<%=request.getContextPath()%>/plugins/js/main.js"></script>
 	
-<!-- Map -->
-	<script src="http://maps.googleapis.com/maps/api/js"></script>
-	<script src="<%=request.getContextPath()%>/plugins/js/markerclusterer.js"></script>
-	<script src="<%=request.getContextPath()%>/plugins/js/map_hotels.js"></script>
-	<script src="<%=request.getContextPath()%>/plugins/js/infobox.js"></script>
-	
 </body>
+<%--
+  java.sql.Timestamp rentStartTime = null;
+  try {
+	  rentStartTime = orderDetailVO.getRentStartTime();
+   } catch (Exception e) {
+	   rentStartTime = new java.sql.Timestamp(System.currentTimeMillis());
+   }
+  
+  java.sql.Timestamp rentEndTime = null;
+  try {
+	  rentEndTime = orderDetailVO.getRentEndTime();
+   } catch (Exception e) {
+	   rentEndTime = new java.sql.Timestamp(System.currentTimeMillis());
+   }
+--%>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/plugins/datetimepicker/jquery.datetimepicker.css" />
+<script src="<%=request.getContextPath()%>/plugins/datetimepicker/jquery.js"></script>
+<script src="<%=request.getContextPath()%>/plugins/datetimepicker/jquery.datetimepicker.full.js"></script>
+
+<style>
+  .xdsoft_datetimepicker .xdsoft_datepicker {
+           width:  300px;   /* width:  300px; */
+  }
+  .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
+           height: 151px;   /* height:  151px; */
+  }
+</style>
+
+<script>
+          //FreeTimeStart設定   
+          <c:forEach var="spaceDetailVO" items="${list}" varStatus="status">
+          var date2 = '#f_date2${status.index}';
+          $.datetimepicker.setLocale('zh');
+          $(date2).datetimepicker({
+        	  theme: 'bright',              //theme: 'dark',
+       	       timepicker:true,       //timepicker:true,
+       	       //step: 60,                //step: 60 (這是timepicker的預設間隔60分鐘)
+       	       format:'Y-m-d H:00:00',         //format:'Y-m-d H:i:s',
+       		   //value: 'new Date()', // value:   new Date(),
+                 //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
+               startDate:	          'new Date()',  // 起始日
+               minDate:               '-1970-01-01', // 去除今日(不含)之前
+               maxDate:               '+2021-07-01'  // 去除今日(不含)之後
+          });
+             
+              
+         
+          // ----------------------------------------------------------以下用來排定無法選擇的日期-----------------------------------------------------------
+
+          //      1.以下為某一天之前的日期無法選擇
+            var somedate1 = new Date('dateString');
+            $(date2).datetimepicker({
+                  beforeShowDay: function(date) {
+                  if (  date.getYear() <  somedate1.getYear() || 
+              		    (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
+              		    (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
+                     ) {
+                          return [false, ""]
+                     }
+                          return [true, ""];
+             }});
+
+              
+              //      2.以下為某一天之後的日期無法選擇
+             var somedate2 = new Date('2021-07-01');
+             $(date2).datetimepicker({
+                 beforeShowDay: function(date) {
+                   if (  date.getYear() >  somedate2.getYear() || 
+              		      (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
+              		      (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
+                      ) {
+                          return [false, ""]
+                        }
+                          return [true, ""];
+             }});
+             
+          //FreeTimeEnd設定
+          var date3 = '#f_date3${status.index}';
+          $.datetimepicker.setLocale('zh');
+          $(date3).datetimepicker({
+               theme: 'bright',              //theme: 'dark',
+       	       timepicker:true,       //timepicker:true,
+       	       //step: 60,                //step: 60 (這是timepicker的預設間隔60分鐘)
+       	       format:'Y-m-d H:00:00',         //format:'Y-m-d H:i:s',
+       		   //value: 'new Date()', // value:   new Date(),
+                 //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
+               startDate:	          'new Date()',  // 起始日
+               minDate:               '-1970-01-01', // 去除今日(不含)之前
+               maxDate:               '+2021-07-01'  // 去除今日(不含)之後
+          });
+              
+         
+          // ----------------------------------------------------------以下用來排定無法選擇的日期-----------------------------------------------------------
+
+          //      1.以下為某一天之前的日期無法選擇
+            var somedate1 = new Date('');
+            $(date3).datetimepicker({
+                  beforeShowDay: function(date) {
+                  if (  date.getYear() <  somedate1.getYear() || 
+              		    (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
+              		    (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
+                     ) {
+                          return [false, ""]
+                     }
+                          return [true, ""];
+             }});
+
+              
+              //      2.以下為某一天之後的日期無法選擇
+             var somedate2 = new Date('2021-07-01');
+             $(date3).datetimepicker({
+                 beforeShowDay: function(date) {
+                   if (  date.getYear() >  somedate2.getYear() || 
+              		      (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
+              		      (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
+                      ) {
+                          return [false, ""]
+                        }
+                          return [true, ""];
+             }});
+             </c:forEach>
+
+        //      3.以下為兩個日期之外的日期無法選擇 (也可按需要換成其他日期)
+        //      var somedate1 = new Date('2017-06-15');
+        //      var somedate2 = new Date('2017-06-25');
+        //      $('#f_date1').datetimepicker({
+        //          beforeShowDay: function(date) {
+        //        	  if (  date.getYear() <  somedate1.getYear() || 
+        //		           (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
+        //		           (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
+        //		             ||
+        //		            date.getYear() >  somedate2.getYear() || 
+        //		           (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
+        //		           (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
+        //              ) {
+        //                   return [false, ""]
+        //              }
+        //              return [true, ""];
+        //      }});
+        
+</script>
 </html>

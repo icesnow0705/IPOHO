@@ -126,7 +126,7 @@
     </FORM>
   </li>
  
-<jsp:useBean id="spaceDetailSvc" scope="page" class="com.spacedetail.model.SpaceDetailService" /> 
+<jsp:useBean id="spaceDetailSvc" scope="page" class="com.spaceDetail.model.SpaceDetailService" /> 
    
   <li>
      <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/spacedetail/spacedetail.do" >

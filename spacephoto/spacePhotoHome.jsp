@@ -127,7 +127,7 @@
     </FORM>
   </li>
  
-<jsp:useBean id="spacePhotoSvc" scope="page" class="com.spacephoto.model.SpacePhotoService" /> 
+<jsp:useBean id="spacePhotoSvc" scope="page" class="com.spacePhoto.model.SpacePhotoService" /> 
    
   <li>
      <FORM METHOD="post" ACTION="spacephoto.do" >

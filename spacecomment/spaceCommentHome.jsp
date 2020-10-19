@@ -128,7 +128,7 @@
     </FORM>
   </li>
  
-<jsp:useBean id="spaceCommentSvc" scope="page" class="com.spacecomment.model.SpaceCommentService" /> 
+<jsp:useBean id="spaceCommentSvc" scope="page" class="com.spaceComment.model.SpaceCommentService" /> 
    
   <li>
      <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/spacecomment/spacecomment.do" >

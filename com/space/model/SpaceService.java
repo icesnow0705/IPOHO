@@ -31,4 +31,9 @@ public class SpaceService {
 	public List<SpaceVO> getAll(){
 		return dao.getAll();
 	}
+	
+	//TDD
+	public List<SpaceVO> searchSpace(String subQuery, String spaceAddress, String spaceType, String spaceContain){
+		return dao.searchSpace(subQuery, spaceAddress, spaceType, spaceContain);
+	}
 }

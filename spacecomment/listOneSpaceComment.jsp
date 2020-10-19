@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.spacecomment.model.*"%>
+<%@ page import="com.spaceComment.model.*"%>
 
 <%
   SpaceCommentVO spaceCommentVO = (SpaceCommentVO) request.getAttribute("spaceCommentVO");
@@ -131,7 +131,7 @@
 	<tr>
 		<td><%=spaceCommentVO.getSpaceCommentId()%></td>
 		<td><%=spaceCommentVO.getSpaceId()%></td>
-		<td><%=spaceCommentVO.getMemId()%></td>
+		<td><%=spaceCommentVO.getMemberId()%></td>
 		<td><%=spaceCommentVO.getSpaceCommentContent()%></td>
 		<td><%=spaceCommentVO.getSpaceCommentLevel()%></td>
 		<td><%=spaceCommentVO.getSpaceCommentDate()%></td>

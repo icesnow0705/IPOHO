@@ -1,4 +1,4 @@
-package com.spacecomment.model;
+package com.spaceComment.model;
 
 import java.util.List;
 
@@ -8,4 +8,6 @@ public interface SpaceCommentDAO_interface {
 	public void update(SpaceCommentVO spaceCommentVO);
 	public SpaceCommentVO selectOne(String spaceCommentId);
 	public List<SpaceCommentVO> getAll();
+	public List<SpaceCommentVO> getAllCommBySpace(String spaceId);
+	public Double getSpaceRating(String spaceId);
 }

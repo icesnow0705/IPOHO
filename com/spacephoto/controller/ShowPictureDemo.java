@@ -1,4 +1,4 @@
-package com.spacephoto.controller;
+package com.spacePhoto.controller;
 
 import java.io.*;
 import java.sql.*;

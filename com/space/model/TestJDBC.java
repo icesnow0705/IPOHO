@@ -1,99 +1,92 @@
 package com.space.model;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.List;
 
 public class TestJDBC {
 	public static void main(String[] args) {
 	
-		SpaceDAO_interface dao = new SpaceDAO();
+		SpaceDAOInterfaceB dao = new SpaceDAOB();
 		
-//		ByteArrayOutputStream baos = null;
-//		try {
-//			File file = new File("C:\\Users\\user\\Desktop\\allshit.gif");
-//			File file = new File("C:\\Users\\HENRYZ\\Desktop\\zzz.jpg");
-//			FileInputStream fis = new FileInputStream(file);
-//			baos = new ByteArrayOutputStream();
-//			byte[] buffer = new byte[8192];
-//			int i;
-//			while ((i = fis.read(buffer)) != -1) {
-//				baos.write(buffer, 0, i);
-//			}
-//			baos.close();
-//			fis.close();
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
+		
+//		SpaceServiceB ss = new SpaceServiceB();
+//		List<SpaceVO> list = ss.selectAllNewSpace("F");
+//		for(SpaceVO spaceVO : list) {
+//		System.out.println(spaceVO.getSpaceId());
 //		}
 		
-//		All
-//		List<SpaceVO> list = dao.getAll();
+		String s = "就是爽";
+		String[] sSplit = s.split(":");
+		for(String ss : sSplit) {
+			System.out.println(ss);
+		}
+//		List<SpaceVO> list = dao.selectAll();
 //		for(SpaceVO spaceVO : list) {
-//			System.out.println(spaceVO.getSpaceId());
-//			System.out.println(spaceVO.getMemId());
-//			System.out.println(spaceVO.getEmpId());
-//			System.out.println(spaceVO.getSpaceLng());
-//			System.out.println(spaceVO.getSpaceLat());
-//			System.out.println(spaceVO.getSpaceName());
-//		}		
-//		System.out.println("Test All");
+//		System.out.println(spaceVO.getSpaceId());
+//		}
+//		System.out.println("FUCK");
 		
-		//One
+//		for(SpaceVO spaceVO : list) {
+//			System.out.println(spaceVO.getEmpId());
+//		}		
+		
+		//selectone
 //		SpaceVO one = dao.selectOne("SPACE00001");
 //		System.out.println(one.getSpaceId());
-//		System.out.println(one.getMemId());
-//		System.out.println(one.getEmpId());
-//		System.out.println(one.getSpaceName());
-//		System.out.println("Test One");
 		
-		//insert
+		//add
 //		SpaceVO add = new SpaceVO();
-//		add.setMemId("MEM00002");
-//		add.setEmpId("EMP00004");
-//		add.setSpaceAddress("SPACE_ADDRESS");
-//		add.setSpaceLng(123.456);
-//		add.setSpaceLat(-98.765);
-//		add.setSpaceName("SPACE_NAME");
-//		add.setSpaceType("SPACE_TYPE");
-//		add.setSpaceEquipment("SPACE_EQUMENT");
-//		add.setSpaceContain("CONTAIN");
-//		add.setSpaceRule("SPACE_RULE");
-//		add.setSpaceRefund("SPACE_REFUND");
-//		add.setSpaceStatus("T");
+//		add.setMemberId("20");
+//		add.setEmpId("10");
+//		add.setSpaceAdress("桃園市");
+//		add.setSpaceName("場地四");
+//		add.setSpaceType("聚會");
+//		add.setSpaceEqument("桌子");
+//		add.setSpaceContain("20");
+//		add.setSpaceRule("HAPPY");
+//		add.setSpaceRefund("NEVER");
+//		add.setSpaceStatus("Y");
 //		add.setSpaceSignupDate(java.sql.Date.valueOf("2020-09-01"));
 //		add.setSpaceOnsaleDate(java.sql.Date.valueOf("2020-09-02"));
 //		add.setSpaceOffsaleDate(java.sql.Date.valueOf("2020-09-03"));
 //		dao.insert(add);
-//		System.out.println("Data Inserted");
+//		System.out.println("FUCK");
+		
+		//selectall
+//		SpaceVO selectOne = new SpaceVO();
+//		selectOne = dao.selectOne("20");
+//		System.out.println(selectOne.getMemberId());
+//		System.out.println(selectOne.getSpaceRule());
+		
+		//AllByMember
+//		SpaceService ss = new SpaceService();
+//		List<SpaceVO> all = ss.selectAllSpaceByMember("MEM00003");
+//		for(SpaceVO spaceVO : all) {
+//			System.out.println(spaceVO.getSpaceId());
+////			System.out.println(spaceVO.getEmpId());
+//		}
 		
 		//delete
-		dao.delete("4");
-		System.out.println("Data Deleted");
+//		dao.delete("50");
 		
 		//update
 //		SpaceVO update = new SpaceVO();
-//		update.setSpaceId("4");
-//		update.setMemId("MEM00002");
-//		update.setEmpId("EMP00004");
-//		update.setSpaceAddress("NEW_ADDRESS");
-//		update.setSpaceLng(123.321);
-//		update.setSpaceLat(-94.87);
-//		update.setSpaceName("NEW_NAME");
-//		update.setSpaceType("NEW_TYPE");
-//		update.setSpaceEquipment("NEW_EQUMENT");
-//		update.setSpaceContain("NEW");
-//		update.setSpaceRule("NEW_RULE");
-//		update.setSpaceRefund("NEW_REFUND");
-//		update.setSpaceStatus("F");
+//		update.setSpaceId("10");
+//		update.setMemberId("20");
+//		update.setEmpId("10");
+//		update.setSpaceAdress("桃園市");
+//		update.setSpaceName("場地四");
+//		update.setSpaceType("聚會");
+//		update.setSpaceEqument("桌子");
+//		update.setSpaceContain("20");
+//		update.setSpaceRule("HAPPY");
+//		update.setSpaceRefund("NEVER");
+//		update.setSpaceStatus("Y");
 //		update.setSpaceSignupDate(java.sql.Date.valueOf("2020-09-01"));
 //		update.setSpaceOnsaleDate(java.sql.Date.valueOf("2020-09-02"));
 //		update.setSpaceOffsaleDate(java.sql.Date.valueOf("2020-09-03"));
 //		dao.update(update);
-//		System.out.println("data updated");
+//		System.out.println("FUCK");
+		
 	}
+
 }

@@ -1,4 +1,4 @@
-package com.spacecomment.controller;
+package com.spaceComment.controller;
 
 import java.io.*;
 import java.util.*;
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import com.spacecomment.model.*;
+import com.spaceComment.model.*;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 @WebServlet("/spacecomment/spacecomment.do")
@@ -165,7 +165,7 @@ public class SpaceCommentServlet extends HttpServlet {
 				SpaceCommentVO spaceCommentVO = new SpaceCommentVO();
 				spaceCommentVO.setSpaceCommentId(spaceCommentId);
 				spaceCommentVO.setSpaceId(spaceId);
-				spaceCommentVO.setMemId(memId);
+				spaceCommentVO.setMemberId(memId);
 				spaceCommentVO.setSpaceCommentContent(spaceCommentContent);
 				spaceCommentVO.setSpaceCommentLevel(spaceCommentLevel);
 				spaceCommentVO.setSpaceCommentDate(spaceCommentDate);
@@ -246,7 +246,7 @@ public class SpaceCommentServlet extends HttpServlet {
 				SpaceCommentVO spaceCommentVO = new SpaceCommentVO();
 				spaceCommentVO.setSpaceCommentId(spaceCommentId);
 				spaceCommentVO.setSpaceId(spaceId);
-				spaceCommentVO.setMemId(memId);
+				spaceCommentVO.setMemberId(memId);
 				spaceCommentVO.setSpaceCommentContent(spaceCommentContent);
 				spaceCommentVO.setSpaceCommentLevel(spaceCommentLevel);
 				spaceCommentVO.setSpaceCommentDate(spaceCommentDate);

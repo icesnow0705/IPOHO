@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.spacecomment.model.*"%>
+<%@ page import="com.spaceComment.model.*"%>
 
 <%
   SpaceCommentVO spaceCommentVO = (SpaceCommentVO) request.getAttribute("spaceCommentVO");
@@ -151,7 +151,7 @@
 		<td><input name="spaceCommentDate" id="f_date1" type="text" value="2020-09-23" ></td>
 	</tr>
 		
- 	<jsp:useBean id="spaceCommentSvc" scope="page" class="com.spacecomment.model.SpaceCommentService" />
+ 	<jsp:useBean id="spaceCommentSvc" scope="page" class="com.spaceComment.model.SpaceCommentService" />
 
 </table>
 <br>
